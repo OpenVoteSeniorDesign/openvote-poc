@@ -1,5 +1,5 @@
 package com.openvote;
- 
+
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,26 +17,25 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 @SuppressWarnings("serial")
 public class OpenVoteServlet extends HttpServlet {
-	
-	static {
-		//ObjectifyService.register(CLASSNAME.class); //Register a class to connect it with the datastore
-	}
-	
+
+    static{
+        // ObjectifyService.register(CLASSNAME.class); //Register a class to connect it with the
+        // datastore
+    }
+
     @Override
-	public void doPost(HttpServletRequest req, HttpServletResponse resp)
-                throws IOException {
-    	
-    	UserService userService = UserServiceFactory.getUserService();
-		User user = userService.getCurrentUser();
-		String userEmail = user.getNickname();
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+
+        UserService userService = UserServiceFactory.getUserService();
+        User user = userService.getCurrentUser();
+        String userEmail = user.getNickname();
         String userID;
-        if (userEmail.indexOf('@') == -1){
-        	userID = (user.getNickname().trim() + "@gmail.com").toLowerCase();
+        if(userEmail.indexOf('@') == -1){
+            userID = (user.getNickname().trim() + "@gmail.com").toLowerCase();
+        }else{
+            userID = (user.getNickname().trim()).toLowerCase();
         }
-        else{
-        	userID = (user.getNickname().trim()).toLowerCase();
-        }
-        //ofy().save().entity(new CLASSNAME.Builder()...); Used to save things in the datastore
+        // ofy().save().entity(new CLASSNAME.Builder()...); Used to save things in the datastore
         resp.sendRedirect("/index.jsp");
     }
 }

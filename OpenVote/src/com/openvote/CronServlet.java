@@ -16,23 +16,22 @@ import javax.servlet.http.*;
 import com.googlecode.objectify.ObjectifyService;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
-
 @SuppressWarnings("serial")
 public class CronServlet extends HttpServlet {
-	private static final Logger _logger = Logger.getLogger(CronServlet.class.getName());
-	private final String endl = "\r\n";
-	
-	static {
-		//ObjectifyService.register(CLASSNAME.class); Register a class to use it in the datastore
-    }
-	
-	@Override
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		
-	}
+    private static final Logger _logger = Logger.getLogger(CronServlet.class.getName());
+    private final String endl = "\r\n";
 
-	@Override
-	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-	}
+    static{
+        // ObjectifyService.register(CLASSNAME.class); Register a class to use it in the datastore
+    }
+
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+
+    }
+
+    @Override
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+
+    }
 }
