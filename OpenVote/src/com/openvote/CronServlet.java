@@ -13,9 +13,6 @@ import javax.mail.internet.InternetAddress;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-import com.googlecode.objectify.ObjectifyService;
-import static com.googlecode.objectify.ObjectifyService.ofy;
-
 @SuppressWarnings("serial")
 public class CronServlet extends HttpServlet {
     private static final Logger _logger = Logger.getLogger(CronServlet.class.getName());
