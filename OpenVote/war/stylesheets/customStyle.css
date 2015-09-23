@@ -1,0 +1,32 @@
+body{
+	background: url(creamDust.png) repeat 0 0;
+	padding-top: 20px;
+  padding-bottom: 20px;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Corben', Georgia, Times, serif;
+}
+h1 { 
+    text-shadow: 1px 1px 1px #ccc;
+}
+p, div {
+    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+}
+img {
+    width:120px;
+    height:90px;
+    float:left;
+    float:top;
+}
+
+.text_line {
+    clear:both;
+}
+
+.originaltxt {
+      border: 1px solid #CCC;
+      color: #999;
+}
+.navbar {
+  margin-bottom: 20px;
+}
