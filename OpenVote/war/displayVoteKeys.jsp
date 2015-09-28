@@ -1,0 +1,2 @@
+- show keys
+- redict to goodbye.jsp on button press

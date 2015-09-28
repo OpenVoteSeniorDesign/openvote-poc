@@ -26,6 +26,15 @@ public class CastVoteServlet extends HttpServlet {
 			throws IOException {
 		resp.setContentType("text/plain");
 		resp.getWriter().println("Hello, world");
+		
+		if(votmg){
+		    -get info
+		    -cast votes
+		    -save keys in session data
+		    -all data you save to check against
+		    -redirect to display.jsp
+		}
+		
 	}
 
 }

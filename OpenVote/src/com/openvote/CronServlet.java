@@ -24,7 +24,12 @@ public class CronServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-
+        //add latency
+        //datasotre.getallVotes
+        //push votes to glcoud
+        //datastore.clearVotes
+        //UpdateAnalyts
+            //retaly totals store in glcloud
     }
 
     @Override
