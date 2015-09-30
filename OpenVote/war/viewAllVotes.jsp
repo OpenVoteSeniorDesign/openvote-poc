@@ -1,0 +1,2 @@
+-search feild readirect to exaltvote.jsp
+-back button

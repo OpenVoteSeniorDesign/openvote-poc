@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
 			throws IOException {
 		resp.setContentType("text/plain");
 		resp.getWriter().println("Hello, world");
+		//login.jsp
 	}
 
 }
