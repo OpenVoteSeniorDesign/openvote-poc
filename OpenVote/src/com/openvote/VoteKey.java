@@ -2,15 +2,16 @@ package com.openvote;
 
 import java.util.UUID;
 
-public class Key {
+public class VoteKey {
+
+	public VoteKey(UUID voteKey) {
+		super();
+		this.voteKey = voteKey;
+	}
 
 	UUID voteKey;
 
 	private UUID getVoteKey() {
 		return voteKey;
-	}
-
-	private void setVoteKey(UUID voteKey) {
-		this.voteKey = voteKey;
 	}
 }
