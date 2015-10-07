@@ -2,15 +2,16 @@ package com.openvote;
 
 public class Vote {
 
+	public Vote(Key voteKey) {
+		super();
+		this.voteKey = voteKey;
+	}
+
 	Key voteKey;
 	Candidate candidate;	//TODO discuss "Candidate" type, where "Candidate" is an Enum
-
+	
 	private Key getVoteKey() {
 		return voteKey;
-	}
-	
-	private void setVoteKey(Key voteKey) {
-		this.voteKey = voteKey;
 	}
 	
 	private Candidate getCandidate() {
