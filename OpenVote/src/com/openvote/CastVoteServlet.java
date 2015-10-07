@@ -24,8 +24,15 @@ public class CastVoteServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
+
+		
+	}
+	
+    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException {
+    	String candidate = req.getParameter("candidate");
 		resp.setContentType("text/plain");
-		resp.getWriter().println("Hello, world");
+		resp.getWriter().println("You voted for " + candidate + ". ");
 		
 		//if(votmg){
 		 //   -get info
@@ -34,7 +41,6 @@ public class CastVoteServlet extends HttpServlet {
 		   // -all data you save to check against
 		   // -redirect to display.jsp
 		//}
-		
-	}
+    }
 
 }

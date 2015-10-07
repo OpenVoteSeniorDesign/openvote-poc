@@ -18,9 +18,16 @@ public class LoginServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		resp.setContentType("text/plain");
-		resp.getWriter().println("Hello, world");
-		//login.jsp
+
 	}
+	
+    public void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException {
+		//verify login by getting login and password from req
+		//if correct, redirect to castvote.jsp
+		//else, redirect to error message / login screen?
+        resp.sendRedirect("/castvote.jsp");
+    }
+	
 
 }
