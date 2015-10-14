@@ -5,7 +5,12 @@ public class Vote {
 	VoteKey voteKey;
 	Candidate candidate;	//TODO discuss "Candidate" type, where "Candidate" is an Enum
 	
-	private VoteKey getVoteKey() {
+	public Vote(VoteKey vk, Candidate c){
+		this.voteKey = vk;
+		this.candidate = c;
+	}
+	
+	public VoteKey getVoteKey() {
 		return voteKey;
 	}
 	

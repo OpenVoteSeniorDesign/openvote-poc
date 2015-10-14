@@ -14,4 +14,8 @@ public class VoteKey {
 	private UUID getVoteKey() {
 		return voteKey;
 	}
+	
+	public String toString(){
+		return this.voteKey.toString();
+	}
 }
