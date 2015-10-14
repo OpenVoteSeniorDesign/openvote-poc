@@ -6,7 +6,8 @@
 <%@ page import="com.google.appengine.api.users.UserService" %>
 <%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
- 
+<%@ page import="com.openvote.Candidate" %> 
+
 <html>
  <head>
    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
@@ -16,10 +17,16 @@
  	<p> Cast your vote! </p>
 
     <form action="/castvote" method="post">
-      <div><input type="radio" name="candidate" value="Nemo" checked>Nemo</div>
+<%    //for(Candidate cName : Candidate.values()){
+%>
+      <div><input type="radio" name="candidate" value="BUSH" checked>George Bush</div>
       <br>
-      <div><input type="radio" name="candidate" value="Dory">Dory</div>
+      <div><input type="radio" name="candidate" value="TRUMP" checked>Donald Trump</div>
       <br>
+      <div><input type="radio" name="candidate" value="CLINTON" checked>Bill Clinton</div>
+      <br>
+<%    //}
+%>
       <div><input type="submit" value="Cast Vote"/></div>
     </form>
 
