@@ -33,9 +33,8 @@ public class CastVoteServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
     	String candidate_str = req.getParameter("candidate");
-    	Candidate c = new Candidate();
     	VoteKey vk = new VoteKey(UUID.randomUUID()); //TODO this needs to be checked for uniqueness
-    	Vote vote = new Vote(vk, c);
+    	Vote vote = new Vote(vk, Candidate.valueOf(candidate_str));
     	
     	
 		resp.setContentType("text/plain");
