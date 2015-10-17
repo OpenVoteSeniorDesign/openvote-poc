@@ -10,11 +10,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
+
 import javax.servlet.http.*;
+import com.googlecode.objectify.ObjectifyService;
 
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
+	
+	static {
+        ObjectifyService.register(Candidate.class);
+    }
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
