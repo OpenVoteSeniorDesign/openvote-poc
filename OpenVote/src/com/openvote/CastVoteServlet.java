@@ -35,9 +35,16 @@ public class CastVoteServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
     	String candidate_str = req.getParameter("candidate");
+    	//is this how you instantiate an enum element?
     	Candidate vote = Candidate.valueOf(candidate_str);   	
     	ofy().save().entity(vote).now();
+    	// need to load to get key to provide voter -> how to load without key?
     	
+    	// cast vote for all fake candidates
+    	// this needs to be moved later in the workflow; voter needs to specify how many batches of fake votes they'd like to send
+    	for (Candidate c: Candidate.values()) {
+    			ofy().save().entity(c).now();
+    	}
     	
     	//VoteKey vk = new VoteKey(UUID.randomUUID()); //TODO this needs to be checked for uniqueness
     	//Vote vote = new Vote(vk, Candidate.valueOf(candidate_str));
@@ -46,7 +53,7 @@ public class CastVoteServlet extends HttpServlet {
     	
 		resp.setContentType("text/plain");
 		resp.getWriter().println("You voted for " + candidate_str + ".");
-		resp.getWriter().println("Your key is " + vote.getVoteKey().toString() + ".");
+		//resp.getWriter().println("Your key is " + vote.getVoteKey().toString() + ".");
 		
 		
 		//if(votmg){
