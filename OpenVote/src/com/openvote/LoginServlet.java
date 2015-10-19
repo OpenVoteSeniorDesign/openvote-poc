@@ -18,7 +18,7 @@ import com.googlecode.objectify.ObjectifyService;
 public class LoginServlet extends HttpServlet {
 	
 	static {
-        ObjectifyService.register(Candidate.class);
+        ObjectifyService.register(com.openvote.Vote.class);
     }
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)

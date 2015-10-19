@@ -19,11 +19,9 @@
     <form action="/castvote" method="post">
 <%    //for(Candidate cName : Candidate.values()){
 %>
-      <div><input type="radio" name="candidate" value="BUSH" checked>George Bush</div>
+      <div><input type="radio" name="candidate" value="DORY" checked>Dory</div>
       <br>
-      <div><input type="radio" name="candidate" value="TRUMP" checked>Donald Trump</div>
-      <br>
-      <div><input type="radio" name="candidate" value="CLINTON" checked>Bill Clinton</div>
+      <div><input type="radio" name="candidate" value="NEMO" checked>Nemo</div>
       <br>
 <%    //}
 %>
