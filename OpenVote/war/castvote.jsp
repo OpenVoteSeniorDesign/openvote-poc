@@ -17,14 +17,13 @@
  	<p> Cast your vote! </p>
 
     <form action="/castvote" method="post">
-<%    //for(Candidate cName : Candidate.values()){
+<%    for(Candidate candidate : Candidate.values()){
 %>
-      <div><input type="radio" name="candidate" value="DORY" checked>Dory</div>
+      <div><input type="radio" name="candidate" value="<%=candidate%>" checked><%=candidate%></div>
       <br>
-      <div><input type="radio" name="candidate" value="NEMO" checked>Nemo</div>
-      <br>
-<%    //}
+<%    }
 %>
+
       <div><input type="submit" value="Cast Vote"/></div>
     </form>
 

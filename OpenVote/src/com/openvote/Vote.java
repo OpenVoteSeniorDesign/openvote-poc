@@ -10,6 +10,7 @@ public class Vote {
 	int candidate;
 	boolean published;
 	
+	//no-arg constructor required by Objectify
 	private Vote() {}
 	
 	public Vote(int candidate) {
@@ -19,6 +20,10 @@ public class Vote {
 
 	public int getCandidate() {
 		return candidate;
+	}
+	
+	public void publish() {
+		this.published = true;
 	}
 	
 }
