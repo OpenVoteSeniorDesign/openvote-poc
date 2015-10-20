@@ -15,8 +15,9 @@
 
     <form action="/castvote" method="post">
 <%    for(Candidate candidate : Candidate.values()){
+			pageContext.setAttribute("candidate", candidate.name());
 %>
-      <div><input type="radio" name="candidate" value="<%=candidate%>" checked><%=candidate%></div>
+      <div><input type="radio" name="candidate" value="${fn:escapeXml(candidate)}" checked>${fn:escapeXml(candidate)}</div>
       <br>
 <%    }
 %>

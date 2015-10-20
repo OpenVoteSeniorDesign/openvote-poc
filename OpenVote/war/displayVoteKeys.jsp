@@ -29,7 +29,6 @@
 			pageContext.setAttribute("fakeVoteCandidate", Candidate.values()[candidateIndex]);
 	%>
 			<p> Candidate: ${fn:escapeXml(fakeVoteCandidate)} </p>
-	    	<br>
 	    	<p> Id: ${fn:escapeXml(fakeVoteId)} </p>
 	    	<br>
 	
