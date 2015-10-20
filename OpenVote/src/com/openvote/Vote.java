@@ -22,6 +22,10 @@ public class Vote {
 		return candidate;
 	}
 	
+	public Long getId() {
+		return id;
+	}
+	
 	public void publish() {
 		this.published = true;
 	}

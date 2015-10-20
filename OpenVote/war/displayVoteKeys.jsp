@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.openvote.Candidate" %> 
+<%@ page import="com.openvote.Vote" %> 
 
 
 
@@ -12,13 +13,28 @@
    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
  </head>
  
+
   <body>
- 	<p> Your vote key is: <c:out value="${voteKey}"/></p>
+   <%
+		pageContext.setAttribute("realVote", request.getAttribute("realVote"));
+		ArrayList<Vote> fakeVotes = (ArrayList<Vote>) request.getAttribute("fakeVotes");
+	%>
+ 
+ 	<p> Your vote key is: ${fn:escapeXml(realVote.id)} </p>
 	<br>
 	<p> Here are some keys corresponding to other candidates: </p>
-	<c:forEach var="key" items="${fakeVoteKeys}">
-	    <c:out value="${key}"/>
-	    <br>
-	</c:forEach>
+	<% for (Vote fakeVote : fakeVotes) {
+			int candidateIndex = fakeVote.getCandidate();
+			pageContext.setAttribute("fakeVoteId", fakeVote.getId());
+			pageContext.setAttribute("fakeVoteCandidate", Candidate.values()[candidateIndex]);
+	%>
+			<p> Candidate: ${fn:escapeXml(fakeVoteCandidate)} </p>
+	    	<br>
+	    	<p> Id: ${fn:escapeXml(fakeVoteId)} </p>
+	    	<br>
+	
+	<% }
+	%>
+	
   </body>
 </html>
