@@ -36,5 +36,13 @@
 	<% }
 	%>
 	
+	<% // TODO
+	// prompt user for more fake keys
+	// if yes, redirect to castFakeVotesServlet, increment numFakeBatches
+	// probably should separate into displayReal.jsp and displayFakes.jsp
+	%>
+	
+	
+	
   </body>
 </html>
