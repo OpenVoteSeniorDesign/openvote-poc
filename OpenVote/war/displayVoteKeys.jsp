@@ -23,7 +23,7 @@
  
  	<p> Your vote key is: ${fn:escapeXml(realVote.id)} </p>
 	<br>
-	<p> Here are some keys corresponding to other candidates: </p>
+	<p> Here are some keys corresponding to other votes: </p>
 	<% for (Vote fakeVote : fakeVotes) {
 			int candidateIndex = fakeVote.getCandidate();
 			pageContext.setAttribute("fakeVoteId", fakeVote.getId());
@@ -34,12 +34,6 @@
 	    	<br>
 	
 	<% }
-	%>
-	
-	<% // TODO
-	// prompt user for more fake keys
-	// if yes, redirect to castFakeVoteServlet, increment numFakeBatches
-	// probably should separate into displayReal.jsp and displayFakes.jsp
 	%>
 	
 	<p> Would you like to see more vote keys?  </p>
