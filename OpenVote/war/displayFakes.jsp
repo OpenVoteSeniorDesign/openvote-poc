@@ -6,8 +6,6 @@
 <%@ page import="com.openvote.Candidate" %> 
 <%@ page import="com.openvote.Vote" %> 
 
-
-
 <html>
  <head>
    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
@@ -16,13 +14,10 @@
 
   <body>
    <%
-		pageContext.setAttribute("realVote", request.getAttribute("realVote"));
-		pageContext.setAttribute("numBatches", request.getAttribute("numFakeVoteBatches"));
 		ArrayList<Vote> fakeVotes = (ArrayList<Vote>) request.getAttribute("fakeVotes");
+		pageContext.setAttribute("numFakeVoteBatches", request.getAttribute("numFakeVoteBatches"));
 	%>
  
- 	<p> Your vote key is: ${fn:escapeXml(realVote.id)} </p>
-	<br>
 	<p> Here are some keys corresponding to other candidates: </p>
 	<% for (Vote fakeVote : fakeVotes) {
 			int candidateIndex = fakeVote.getCandidate();
@@ -45,10 +40,10 @@
 	<p> Would you like to see more vote keys?  </p>
 	<form action="/castfakevote" method="post">
       <div><input type="submit" value="Yes"/></div>
-      <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
+      <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numFakeVoteBatches)}"/>
     </form>
     
-   	<form action="/goodbye" method="post">
+	<form action="/goodbye" method="post">
       <div><input type="submit" value="No"/></div>
     </form>
 	

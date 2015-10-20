@@ -41,6 +41,24 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/castvote</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+        <servlet-name>castfakevote</servlet-name>
+        <servlet-class>com.openvote.CastFakeVoteServlet</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>castfakevote</servlet-name>
+		<url-pattern>/castfakevote</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+        <servlet-name>goodbye</servlet-name>
+        <servlet-class>com.openvote.GoodbyeServlet</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>goodbye</servlet-name>
+		<url-pattern>/goodbye</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
