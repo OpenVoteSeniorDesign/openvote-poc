@@ -7,23 +7,30 @@
 
 <html>
  <head>
-   <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+   <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.css" />
  </head>
  
   <body>
- 	<p> Cast your vote! </p>
+  <div class="container">
+  <h2> OpenVote </h2>
 
     <form action="/castvote" method="post">
-<%    for(Candidate candidate : Candidate.values()){
-			pageContext.setAttribute("candidate", candidate.name());
+      <div class="panel panel-default">
+        <div class="panel-heading">Cast Your Vote!</div>
+        <div class="panel-body">
+<%        for(Candidate candidate : Candidate.values()){
+			      pageContext.setAttribute("candidate", candidate.name());
 %>
-      <div><input type="radio" name="candidate" value="${fn:escapeXml(candidate)}" checked>${fn:escapeXml(candidate)}</div>
-      <br>
-<%    }
+            <div class="form-inline" align=left><input type="radio" name="candidate" value="${fn:escapeXml(candidate)}" checked>${fn:escapeXml(candidate)}</div>
+            <br>
+<%        }
 %>
-      <div><input type="submit" value="Cast Vote"/></div>
-    </form>
-
+      		<div class="form-group" align=left><button type="submit" class="btn btn-default">Cast Vote</button></div>
+    		</div>
+		  </div>
+    	</form>
+	</div>
+	
   </body>
 </html>
 	
