@@ -16,27 +16,25 @@
 
   <body>
    <%
-		pageContext.setAttribute("realVote", request.getAttribute("realVote"));
 		pageContext.setAttribute("numBatches", request.getAttribute("numFakeVoteBatches"));
-		ArrayList<Vote> fakeVotes = (ArrayList<Vote>) request.getAttribute("fakeVotes");
+		ArrayList<Vote> votes = (ArrayList<Vote>) request.getAttribute("votes");
 	%>
  
- 	<p> Your vote key is: ${fn:escapeXml(realVote.id)} </p>
-	<br>
-	<p> Here are some keys corresponding to other votes: </p>
-	<% for (Vote fakeVote : fakeVotes) {
-			int candidateIndex = fakeVote.getCandidate();
-			pageContext.setAttribute("fakeVoteId", fakeVote.getId());
-			pageContext.setAttribute("fakeVoteCandidate", Candidate.values()[candidateIndex]);
+	<p> Here are your vote keys: </p>
+	<% for (Vote vote : votes) {
+			int candidateIndex = vote.getCandidate();
+			pageContext.setAttribute("voteId", vote.getId());
+			pageContext.setAttribute("voteCandidate", Candidate.values()[candidateIndex]);
 	%>
-			<p> Candidate: ${fn:escapeXml(fakeVoteCandidate)} </p>
-	    	<p> Id: ${fn:escapeXml(fakeVoteId)} </p>
+			<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
+	    	<p> Id: ${fn:escapeXml(voteId)} </p>
 	    	<br>
 	
 	<% }
 	%>
 	
 	<p> Would you like to see more vote keys?  </p>
+	<p> testing: ${fn:escapeXml(numFakeVoteBatches)} </p>
 	<form action="/castfakevote" method="post">
       <div><input type="submit" value="Yes"/></div>
       <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>

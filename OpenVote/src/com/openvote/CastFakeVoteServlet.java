@@ -23,16 +23,16 @@ public class CastFakeVoteServlet extends HttpServlet
     	numFakeVoteBatches += 1;
 
     	// cast vote for all fake candidates
-    	ArrayList<Vote> fakeVotes = new ArrayList<Vote>();
+    	ArrayList<Vote> votes = new ArrayList<Vote>();
 		for (Candidate c: Candidate.values()) {
 			Vote fakeVote = new Vote(c.ordinal());
     		ofy().save().entity(fakeVote).now();
-    		fakeVotes.add(fakeVote);
+    		votes.add(fakeVote);
     	}
 
-		req.setAttribute("fakeVotes", fakeVotes);
+		req.setAttribute("votes", votes);
 		req.setAttribute("numFakeVoteBatches", numFakeVoteBatches);
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/displayFakes.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/displayVoteKeys.jsp");
 		try
 		{
 			dispatcher.forward(req, resp);
