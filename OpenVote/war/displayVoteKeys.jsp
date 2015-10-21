@@ -40,6 +40,7 @@
       <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
     </form>
     
+    //hyperlink button to goodbye jsp
    	<form action="/goodbye" method="post">
       <div><input type="submit" value="No"/></div>
     </form>
