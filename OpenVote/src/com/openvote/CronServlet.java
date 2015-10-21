@@ -58,36 +58,54 @@ public class CronServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
-
+        
+        // 1 Random Time
         randomSleepDelay();
 
-        // get votes from data store filtered on property real/temp
+        // 2 Get votes from data store filtered on property published
         List<Candidate> candList = ObjectifyService.ofy().load().type(Candidate.class).filter("published ==", false).list(); 
-        //Tally Up them                                                                                                                   // vote
+        
+        // 3 Taly Up all of the unb-pulished votes                                                                                                                // vote
         Map<Candidate, Integer> tally = new HashMap<Candidate, Integer>();
         for(Candidate c : candList){
             tally.put(c,tally.get(c)+1);
             
         }
         
-        //TODO Fix later because we dont think this is right
-        // require atleast one vote per candiate must be present before we can move votes over
-        boolean anonimityTransfer = (tally.keySet().size() > Candidate.values().length) && (candList.size()>TEMP_VOTE_BUFFER_FILL);
+       /* 4 Anonymity Check : 
+        * Require at least one vote per candidate must be present before we can move votes over
+        * numFakeBatches saved by CastFakeVotes atomically and assumed to be only first Integer in data store
+        * 
+        * Alternative condition:
+        * boolean anonimityTransfer = (tally.keySet().size() > Candidate.values().length) && (candList.size()>TEMP_VOTE_BUFFER_FILL);
+        */
+       
+       int numFakeBatches = ObjectifyService.ofy().load().type(Integer.class).first().safe().intValue() ; //this will be number of the fake vote clusters
+       int numCandiates = Candidate.values().length;
+       int realVotes =  candList.size() - numFakeBatches * numCandiates;
+       
+       //As long as all the talys are greater than realVotes we can go ahead and publish
+       boolean doNotPublish = true ; 
+       for(Candidate c : tally.keySet()){
+           doNotPublish &= tally.get(c) >= realVotes ;
+       }
+        
        
         
-        // If we can anynomusly do the transfer go ahead and change temp to real
-        // TODO Add Time Out 
-        if(anonimityTransfer){ 
-                for(Candidate c: candList){
-                  
-                    //1 is going to work
-                    c.setPublished(true);
-                    ObjectifyService.ofy().save().entities(c);
-                    
-                    /*2
-                    ObjectifyService.ofy().toEntity(c).setProperty("published", true);*/
-
-                }
+       /* TODO 5 Publish or Time Out Check : 
+        * Publish to data store after changing the varible
+        * TODO Add Time Out 
+        * */
+        
+        if(doNotPublish == false){ 
+            for(Candidate c: candList){
+                //1 is going to work
+                c.setPublished(true);
+                ObjectifyService.ofy().save().entities(c);
+                
+                /*2
+                ObjectifyService.ofy().toEntity(c).setProperty("published", true);*/
+            }
         }else{ 
             /*
              * Integer intLoad = ObjectifyService.ofy().load().entity(Integer.class).safe();
@@ -104,7 +122,11 @@ public class CronServlet extends HttpServlet {
             ObjectifyService.ofy().save().entity(timeOut);*/
         }
 
-        // TODO Update Analytics to include the the stuff from tally
+        /* TODO 6 Update Published Taly  
+         * Load TallyClass from data store
+         * Global Tally += local Tally Data of real and vake votes
+         * Save TallClass in data store
+         * */
 
     }
 
