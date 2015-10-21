@@ -40,10 +40,6 @@ public class CronServlet extends HttpServlet {
     private static final int MAX_TIME_OUT = 0;
     private static final int TEMP_VOTE_BUFFER_FILL = Candidate.values().length + 1;
 
-    private static final int
-    static{
-        // ObjectifyService.register(CLASSNAME.class); Register a class to use it in the datastore
-    }
 
     // This adds a random amount of latency with a specified range in values and a desired offset in
     // units of seconds
