@@ -7,10 +7,16 @@
   </head>
   
   <body>
-	  <form action="LoginServlet" method="post">  
-	  Username:<input type="text" name="name"><br>  
-	  Password:<input type="password" name="password"><br>  
-	  <input type="submit" value="login">  
-	  </form>  
+      <form action="checklogin.jsp">
+          <table>
+              <tr>
+                  <td> Username  : </td><td> <input name="name" size=15 type="text" /> </td> 
+              </tr>
+              <tr>
+                  <td> Password  : </td><td> <input name="password" size=15 type="password" /> </td> 
+              </tr>
+          </table>
+          <input type="submit" value="login" />
+      </form>
    </body>
  </html>
