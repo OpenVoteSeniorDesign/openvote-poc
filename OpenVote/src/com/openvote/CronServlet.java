@@ -1,26 +1,17 @@
 package com.openvote;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-import javax.mail.Address;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tools.ant.taskdefs.LoadResource;
-import org.apache.tools.ant.taskdefs.Sleep;
-
-import com.googlecode.objectify.Key;
-import com.googlecode.objectify.LoadResult;
-import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
 @SuppressWarnings("serial")
@@ -33,11 +24,7 @@ public class CronServlet extends HttpServlet {
     // private static Properties properties;
     // private static Storage storage;
 
-    private static final String PROJECT_ID_PROPERTY = "project.id"; // openvote-poc
-    private static final String APPLICATION_NAME_PROPERTY = "application.name";// openvote-poc
-    private static final String ACCOUNT_ID_PROPERTY = "account.id";//
-    private static final String PRIVATE_KEY_PATH_PROPERTY = "private.key.path";
-    private static final int MAX_TIME_OUT = 0;
+    private static final int MAX_TIME_OUT = 100;
     private static final int TEMP_VOTE_BUFFER_FILL = Candidate.values().length + 1;
 
 
@@ -59,13 +46,18 @@ public class CronServlet extends HttpServlet {
         randomSleepDelay();
 
         // 2 Get votes from data store filtered on property published
-        List<Candidate> candList = ObjectifyService.ofy().load().type(Candidate.class).filter("published ==", false).list(); 
+        List<Vote> voteList = ObjectifyService.ofy().load().type(Vote.class).filter("published ==", false).list(); 
         
         // 3 Taly Up all of the unb-pulished votes                                                                                                                // vote
         Map<Candidate, Integer> tally = new HashMap<Candidate, Integer>();
-        for(Candidate c : candList){
-            tally.put(c,tally.get(c)+1);
+        for(Vote v : voteList){
+            Candidate key = Candidate.values()[v.getCandidate()];
             
+            if(tally.containsKey(key)==false){
+                tally.put(key,1);
+            }else{
+                tally.put(key,tally.get(key)+1);
+            }
         }
         
        /* 4 Anonymity Check : 
@@ -75,10 +67,10 @@ public class CronServlet extends HttpServlet {
         * Alternative condition:
         * boolean anonimityTransfer = (tally.keySet().size() > Candidate.values().length) && (candList.size()>TEMP_VOTE_BUFFER_FILL);
         */
-       
-       int numFakeBatches = ObjectifyService.ofy().load().type(Integer.class).first().safe().intValue() ; //this will be number of the fake vote clusters
+        
+       int numFakeBatches = ObjectifyService.ofy().load().type(Integer.class).first().getValue() ; //this will be number of the fake vote clusters
        int numCandiates = Candidate.values().length;
-       int realVotes =  candList.size() - numFakeBatches * numCandiates;
+       int realVotes =  voteList.size() - numFakeBatches * numCandiates;
        
        //As long as all the talys are greater than realVotes we can go ahead and publish
        boolean doNotPublish = true ; 
@@ -90,14 +82,14 @@ public class CronServlet extends HttpServlet {
         
        /* TODO 5 Publish or Time Out Check : 
         * Publish to data store after changing the varible
-        * TODO Add Time Out 
+        * TODO Add Time Out based on MAX_TIME_OUT
         * */
         
         if(doNotPublish == false){ 
-            for(Candidate c: candList){
+            for(Vote v: voteList){
                 //1 is going to work
-                c.setPublished(true);
-                ObjectifyService.ofy().save().entities(c);
+                v.publish();
+                ObjectifyService.ofy().save().entities(v);
                 
                 /*2
                 ObjectifyService.ofy().toEntity(c).setProperty("published", true);*/

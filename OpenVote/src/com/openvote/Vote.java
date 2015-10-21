@@ -2,13 +2,14 @@ package com.openvote;
 
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 @Entity
 public class Vote {
 
 	@Id Long id;
-	int candidate;
-	boolean published;
+	@Index int candidate;
+	@Index boolean published;
 	
 	//no-arg constructor required by Objectify
 	private Vote() {}
