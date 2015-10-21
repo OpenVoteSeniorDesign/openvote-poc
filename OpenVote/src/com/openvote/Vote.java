@@ -1,28 +1,33 @@
 package com.openvote;
 
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+
+@Entity
 public class Vote {
 
-	VoteKey voteKey;
-	Candidate candidate;	//TODO discuss "Candidate" type, where "Candidate" is an Enum
+	@Id Long id;
+	int candidate;
+	boolean published;
 	
-	public Vote(VoteKey vk, Candidate c){
-		this.voteKey = vk;
-		this.candidate = c;
+	//no-arg constructor required by Objectify
+	private Vote() {}
+	
+	public Vote(int candidate) {
+		this.candidate = candidate;
+		this.published = false;
 	}
-	
-	public VoteKey getVoteKey() {
-		return voteKey;
-	}
-	
-	private void setVoteKey(VoteKey voteKey) {
-		this.voteKey = voteKey;
-	}
-	
-	private Candidate getCandidate() {
+
+	public int getCandidate() {
 		return candidate;
 	}
 	
-	private void setCandidate(Candidate candidate) {
-		this.candidate = candidate;
+	public Long getId() {
+		return id;
 	}
+	
+	public void publish() {
+		this.published = true;
+	}
+	
 }
