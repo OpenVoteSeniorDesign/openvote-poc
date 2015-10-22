@@ -21,7 +21,7 @@ public class CastVoteServlet extends HttpServlet {
 	}
 	
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws IOException {
+            throws IOException, ServletException {
     	
     	//if logged in:
     	HttpSession session=req.getSession(false);  
@@ -48,24 +48,15 @@ public class CastVoteServlet extends HttpServlet {
 		req.setAttribute("votes", votes);
 		req.setAttribute("numFakeVoteBatches", 1);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/displayVoteKeys.jsp");
-		try
-		{
 			dispatcher.forward(req, resp);
-		} catch (ServletException e)
-		{
-			e.printStackTrace();
-		}
+
 		
         } else {
         	//if not logged in
         	PrintWriter out=resp.getWriter(); 
-        	out.print("You do not have permission to see this page. Login:");  
-            try {
+        	out.print("You do not have permission to see this page. Login:"); 
 				req.getRequestDispatcher("login.jsp").include(req, resp);
-			} catch (ServletException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}  
+			
         }
 		
     }
