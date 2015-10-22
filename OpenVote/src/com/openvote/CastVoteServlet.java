@@ -1,12 +1,14 @@
 package com.openvote;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
  
@@ -19,7 +21,12 @@ public class CastVoteServlet extends HttpServlet {
 	}
 	
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws IOException {
+            throws IOException, ServletException {
+    	
+    	//if logged in:
+    	HttpSession session=req.getSession(false);  
+        if(session!=null){  
+    	
     	String candidate_str = req.getParameter("candidate");
     	
     	// cast real vote
@@ -41,13 +48,16 @@ public class CastVoteServlet extends HttpServlet {
 		req.setAttribute("votes", votes);
 		req.setAttribute("numFakeVoteBatches", 1);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/displayVoteKeys.jsp");
-		try
-		{
 			dispatcher.forward(req, resp);
-		} catch (ServletException e)
-		{
-			e.printStackTrace();
-		}
+
+		
+        } else {
+        	//if not logged in
+        	PrintWriter out=resp.getWriter(); 
+        	out.print("You do not have permission to see this page. Login:"); 
+				req.getRequestDispatcher("login.jsp").include(req, resp);
+			
+        }
 		
     }
 
