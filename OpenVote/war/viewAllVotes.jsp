@@ -16,6 +16,9 @@
     	<div class="container">
   			<h2>OpenVote</h2>
 			<div class="container">
+				<form action="/viewAllVotes.jsp" method="post">
+			    	<div><input type="submit" value="Refresh"/></div>
+				</form>
 			      <% //get all of the published votes
 			      List<Vote> voteList = ObjectifyService.ofy()
 			      						.load().type(Vote.class)
@@ -33,8 +36,15 @@
 			      // Look at all of our votes
 			        for (Vote vote : voteList) {
 			            pageContext.setAttribute("vote candidate", vote.candidate);
-			            String candidate = vote.getCandidate();
+			            Integer c = vote.getCandidate();
 			            Long id = vote.getId();
+			            String candidate = "";
+			            if(c == 0){ //TODO this isn't clean coding...
+			            	candidate = "Nemo";
+			            }else{
+			            	candidate = "Dory";
+			            }
+			            
 			            pageContext.setAttribute("vote_candidate", candidate);
 			            pageContext.setAttribute("vote_id", id.toString());
 				%>
@@ -47,9 +57,7 @@
 				%>
 				
 				//TODO This form needs to be updated with a refresh button
-				<form action="/viewAllVotes.jsp" method="post">
-			    	<div><input type="submit" value="Refresh"/></div>
-				</form>
+
 				     
 			</div>
 		</div>
