@@ -18,6 +18,8 @@ public class ScrollVotesServlet extends HttpServlet
 	
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
+    	
+    	// increment counter used to index through array of fake votes on displayVoteKey.jsp
     	Integer voteIndex = new Integer(req.getParameter("voteIndex"));
     	voteIndex += 1;
     	req.setAttribute("voteIndex",voteIndex);

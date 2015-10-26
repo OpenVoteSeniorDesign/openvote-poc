@@ -22,6 +22,7 @@ public class CastVoteServlet extends HttpServlet {
             throws IOException {
     	String candidate_str = req.getParameter("candidate");
     	
+    	
     	// cast real vote
     	ArrayList<Vote> votes = new ArrayList<Vote>();
     	Vote vote = new Vote(Candidate.valueOf(candidate_str).ordinal());
@@ -36,10 +37,14 @@ public class CastVoteServlet extends HttpServlet {
     		ofy().save().entity(fakeVote).now();
     		votes.add(fakeVote);
     	}
+
+		// save number of fake vote batches
+    	VoteBatchCounter counter = new VoteBatchCounter(1);
+		ofy().save().entity(counter).now();
     	
-    	// pass real and fake vote information to display keys page
+    	// pass vote information to display keys page
 		req.getSession().setAttribute("votes", votes);
-		req.setAttribute("numFakeVoteBatches", 1);
+		req.setAttribute("numFakeVoteBatches", counter.getNumBatches());
 		req.setAttribute("voteIndex", 0);
 
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/displayVoteKeys.jsp");

@@ -20,7 +20,6 @@ public class CastFakeVoteServlet extends HttpServlet
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
     	Integer numFakeVoteBatches = new Integer(req.getParameter("numFakeVoteBatches"));
-    	numFakeVoteBatches += 1;
 
     	// cast vote for all fake candidates
     	ArrayList<Vote> votes = new ArrayList<Vote>();
@@ -29,6 +28,11 @@ public class CastFakeVoteServlet extends HttpServlet
     		ofy().save().entity(fakeVote).now();
     		votes.add(fakeVote);
     	}
+		
+		// update number of fake vote batches saved in Datastore
+		VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
+		numFakeVoteBatches = counter.increment();
+		ofy().save().entity(counter).now();
 
 		req.getSession().setAttribute("votes", votes);
 		req.setAttribute("numFakeVoteBatches", numFakeVoteBatches);
