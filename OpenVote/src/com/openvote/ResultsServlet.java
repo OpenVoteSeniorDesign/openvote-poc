@@ -30,6 +30,7 @@ public class ResultsServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
            //shows on screen
+    	resp.sendRedirect("/viewAllVotes.jsp");
     }
 
 }
