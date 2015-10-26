@@ -10,6 +10,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+
+import com.google.appengine.api.users.*;
 import com.googlecode.objectify.ObjectifyService;
 
 @SuppressWarnings("serial")
@@ -29,7 +31,12 @@ public class LoginServlet extends HttpServlet {
 	
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-    	
+
+		UserService userService=UserServiceFactory.getUserService();
+		User user=userService.getCurrentUser();
+		
+		 if (userService.isUserAdmin()) {
+		
     	// These are null as user has not yet voted
     	req.getSession().setAttribute("previousVote", null);
     	req.getSession().setAttribute("currentVote", null);
@@ -41,6 +48,13 @@ public class LoginServlet extends HttpServlet {
 		{
 			e.printStackTrace();
 		}
+	
+ 
+    	} else {
+    	    resp.sendRedirect(userService.createLoginURL(req.getRequestURI()));
+    	  }
+
+
     }
 	
 
