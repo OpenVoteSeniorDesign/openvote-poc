@@ -33,7 +33,7 @@
 			%>
 			
 			<p> Would you like to see more vote keys?  </p>
-			<p> testing: ${fn:escapeXml(numFakeVoteBatches)} </p>
+			<% // <p> testing: ${fn:escapeXml(numFakeVoteBatches)} </p> %>
 			<form action="/castfakevote" method="post">
 		      <div><input type="submit" value="Yes"/></div>
 		      <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
