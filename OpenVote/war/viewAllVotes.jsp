@@ -2,7 +2,7 @@
 <%@ page import="com.openvote.Vote" %>
 <%@ page import="com.googlecode.objectify.Key" %>
 <%@ page import="com.googlecode.objectify.ObjectifyService" %>
-
+<%@ page import="com.openvote.Candidate" %>
 
 <html>
 
@@ -30,7 +30,7 @@
 				<%
 			  	  } else {
 				%>
-				<p>Votes in the Election.</p>
+				<p>Votes in the Election:</p>
 				
 				<%
 			      // Look at all of our votes
@@ -39,10 +39,12 @@
 			            Integer c = vote.getCandidate();
 			            Long id = vote.getId();
 			            String candidate = "";
-			            if(c == 0){ //TODO this isn't clean coding...
+			            if(c == Candidate.Nemo){ //TODO this isn't clean coding...
 			            	candidate = "Nemo";
-			            }else{
+			            }else if (c == Candidate.Dory){
 			            	candidate = "Dory";
+			            }else{
+			            	candidate = "Unknown";
 			            }
 			            
 			            pageContext.setAttribute("vote_candidate", candidate);
