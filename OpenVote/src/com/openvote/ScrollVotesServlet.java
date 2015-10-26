@@ -1,9 +1,6 @@
 package com.openvote;
 
-import static com.googlecode.objectify.ObjectifyService.ofy;
-
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CastFakeVoteServlet extends HttpServlet
+import java.util.*;
+
+public class ScrollVotesServlet extends HttpServlet
 {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -19,20 +18,10 @@ public class CastFakeVoteServlet extends HttpServlet
 	
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-    	Integer numFakeVoteBatches = new Integer(req.getParameter("numFakeVoteBatches"));
-    	numFakeVoteBatches += 1;
-
-    	// cast vote for all fake candidates
-    	ArrayList<Vote> votes = new ArrayList<Vote>();
-		for (Candidate c: Candidate.values()) {
-			Vote fakeVote = new Vote(c.ordinal());
-    		ofy().save().entity(fakeVote).now();
-    		votes.add(fakeVote);
-    	}
-
-		req.getSession().setAttribute("votes", votes);
-		req.setAttribute("voteIndex", 0);
-		req.setAttribute("numFakeVoteBatches", numFakeVoteBatches);
+    	Integer voteIndex = new Integer(req.getParameter("voteIndex"));
+    	voteIndex += 1;
+    	req.setAttribute("voteIndex",voteIndex);
+    	req.setAttribute("numFakeVoteBatches", req.getParameter("numFakeVoteBatches"));
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/displayVoteKeys.jsp");
 		try
 		{
@@ -41,7 +30,8 @@ public class CastFakeVoteServlet extends HttpServlet
 		{
 			e.printStackTrace();
 		}
-		
+    	
+    	
     }
 
 }

@@ -38,8 +38,10 @@ public class CastVoteServlet extends HttpServlet {
     	}
     	
     	// pass real and fake vote information to display keys page
-		req.setAttribute("votes", votes);
+		req.getSession().setAttribute("votes", votes);
 		req.setAttribute("numFakeVoteBatches", 1);
+		req.setAttribute("voteIndex", 0);
+
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/displayVoteKeys.jsp");
 		try
 		{
