@@ -11,9 +11,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 
-
-import javax.servlet.http.*;
-
 import com.google.appengine.api.users.*;
 import com.googlecode.objectify.ObjectifyService;
 
@@ -53,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 		{
 			e.printStackTrace();
 		}
-	
+
 		//user logged in, is NOT admin
 		} else if (user != null){
 			resp.sendRedirect(userService.createLogoutURL("/login.jsp"));
@@ -75,6 +72,7 @@ public class LoginServlet extends HttpServlet {
     	 catch (IllegalStateException e) {
     	    return false;
     	  }
+
     }
 	
 
