@@ -6,12 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-
 import javax.servlet.http.*;
+
+import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 
 @SuppressWarnings("serial")
@@ -19,6 +16,7 @@ public class LoginServlet extends HttpServlet {
 	
 	static {
         ObjectifyService.register(com.openvote.Vote.class);
+        ObjectifyService.register(com.openvote.TimeOut.class);
     }
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
