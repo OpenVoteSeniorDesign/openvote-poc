@@ -11,23 +11,21 @@
   <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.css" />
  </head>
 
+	<%
+		ArrayList<Vote> votes = (ArrayList<Vote>) session.getAttribute("votes");
+		int voteIndex = (Integer) request.getAttribute("voteIndex");
+		pageContext.setAttribute("numBatches", request.getAttribute("numFakeVoteBatches"));
+	%>
+
   <body>
   	<div class="container">
   		<h2>OpenVote</h2>
   		<div class="container">
-		    <%
-		  		ArrayList<Vote> votes = (ArrayList<Vote>) session.getAttribute("votes");
-				pageContext.setAttribute("numBatches", request.getAttribute("numFakeVoteBatches"));
-				int voteIndex = (Integer) request.getAttribute("voteIndex");
-			%>
-		 
-			
 			<% 
 					Vote vote = votes.get(voteIndex);
 					int candidateIndex = vote.getCandidate();
 					pageContext.setAttribute("voteId", vote.getId());
 					pageContext.setAttribute("voteCandidate", Candidate.values()[candidateIndex]);
-
 			%>
 					<p> Here is your vote: </p>
 					<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
@@ -37,7 +35,6 @@
 			<% 
 			if (voteIndex < votes.size() - 1) {	
 			%>
-
 					<form action="/scrollvotes" method="post">
 				      <div><input type="submit" value="Yes"/></div>
 				      <input type="hidden" name="voteIndex" value="${fn:escapeXml(voteIndex)}"/>
@@ -47,7 +44,7 @@
 		    }
 		    else {
 		    %>
-					<p> [ num fake vote batches: ${fn:escapeXml(numBatches)} ]</p>
+					<% //<p> [ num fake vote batches: ${fn:escapeXml(numBatches)} ]</p> %>
 					<form action="/castfakevote" method="post">
 				      <div><input type="submit" value="Yes"/></div>
 				      <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>

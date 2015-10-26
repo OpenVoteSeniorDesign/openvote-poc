@@ -31,8 +31,9 @@ public class CastFakeVoteServlet extends HttpServlet
     	}
 
 		req.getSession().setAttribute("votes", votes);
-		req.setAttribute("voteIndex", 0);
 		req.setAttribute("numFakeVoteBatches", numFakeVoteBatches);
+		req.setAttribute("voteIndex", 0);
+		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/displayVoteKeys.jsp");
 		try
 		{
