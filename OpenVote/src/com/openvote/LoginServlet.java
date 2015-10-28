@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 
 		UserService userService=UserServiceFactory.getUserService();
 		User user=userService.getCurrentUser();
-		
+
 		//user logged in and is Admin
 		if (user!= null && isAdminLoggedIn()) {
 		
@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 		{
 			e.printStackTrace();
 		}
-
+ 
 		//user logged in, is NOT admin
 		} else if (user != null){
 			resp.sendRedirect(userService.createLogoutURL("/login.jsp"));
