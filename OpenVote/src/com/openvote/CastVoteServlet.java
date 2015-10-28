@@ -2,6 +2,7 @@ package com.openvote;
 
 import java.io.IOException;
 import java.util.*;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -38,8 +39,18 @@ public class CastVoteServlet extends HttpServlet {
     		votes.add(fakeVote);
     	}
 
-		// save number of fake vote batches
-    	VoteBatchCounter counter = new VoteBatchCounter(1);
+		// save number of fake vote batches (create new counter if this is first vote ever cast)
+		VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
+		if (counter == null) {
+			synchronized(CastVoteServlet.class){
+				if (counter == null){
+					counter = new VoteBatchCounter(1);
+				}
+			}
+		}
+		else {
+			counter.increment();
+		}
 		ofy().save().entity(counter).now();
     	
     	// pass vote information to display keys page
