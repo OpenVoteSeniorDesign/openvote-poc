@@ -19,7 +19,6 @@ public class CronServlet extends HttpServlet {
     private static final Logger _logger = Logger.getLogger(CronServlet.class.getName());
     private final String endl = "\r\n";
     private static final int range = 60;
-    private static final int offset = 60;
     // Voting Authority Setup Parameters
     // private static Properties properties;
     // private static Storage storage;
@@ -31,7 +30,7 @@ public class CronServlet extends HttpServlet {
     // units of seconds
     public void randomSleepDelay(){
         try{
-            TimeUnit.SECONDS.sleep((long)(Math.random() * range + offset));
+            TimeUnit.SECONDS.sleep((long)(Math.random() * range));
         }catch(InterruptedException e){
             // TODO Auto-generated catch block
             e.printStackTrace();
