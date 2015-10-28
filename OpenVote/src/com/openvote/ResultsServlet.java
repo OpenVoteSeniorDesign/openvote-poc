@@ -31,7 +31,7 @@ public class ResultsServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
            //shows on screen
-    	System.out.println("Hello! Results Servlet has been invotked! \n");
+    	//System.out.println("Hello! Results Servlet has been invotked! \n");
     	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/viewAllVotes.jsp");
 		try
 		{
