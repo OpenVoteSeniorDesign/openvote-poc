@@ -3,6 +3,11 @@
 <%@ page import="com.googlecode.objectify.Key" %>
 <%@ page import="com.googlecode.objectify.ObjectifyService" %>
 <%@ page import="com.openvote.Candidate" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.googlecode.objectify.*" %>
+<%@ page import="java.util.*" %>
 
 <html>
 
@@ -16,7 +21,7 @@
     	<div class="container">
   			<h2>OpenVote</h2>
 			<div class="container">
-				<form action="/viewAllVotes.jsp" method="post">
+				<form action="/results" method="post">
 			    	<div><input type="submit" value="Refresh"/></div>
 				</form>
 			      <% //get all of the published votes

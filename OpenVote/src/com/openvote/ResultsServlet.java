@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +31,15 @@ public class ResultsServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
            //shows on screen
-    	resp.sendRedirect("/viewAllVotes.jsp");
-    }
+    	System.out.println("Hello! Results Servlet has been invotked! \n");
+    	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/viewAllVotes.jsp");
+		try
+		{
+			dispatcher.forward(req, resp);
+		} catch (ServletException e)
+		{
+			e.printStackTrace();
+		}
+	}
 
 }
