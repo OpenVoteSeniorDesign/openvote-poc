@@ -12,12 +12,8 @@
  </head>
 
 	<%
-		// TODO: make dis werk w/ castvoteservlet
-		Vote myVote = (Vote) request.getAttribute("currentVote");
-		Integer previousVote = (Integer) request.getAttribute("previousVote");
+		Vote myVote = (Vote) request.getSession().getAttribute("currentVote");
 		ArrayList<Vote> offsetVotes = (ArrayList<Vote>) request.getAttribute("offsetVotes");
-		pageContext.setAttribute("myCandidate", myVote.getCandidate());
-		pageContext.setAttribute("previousVote", previousVote);
 	%>
 
   <body>
@@ -27,7 +23,7 @@
   		
 			<%
 					pageContext.setAttribute("voteId", myVote.getId());
-					pageContext.setAttribute("voteCandidate", Candidate.values()[myVote.getCandidate();]);
+					pageContext.setAttribute("voteCandidate", Candidate.values()[myVote.getCandidate()]);
 			%>
 					<p> Here is your vote: </p>
 					<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
@@ -45,7 +41,7 @@
 			%>
 						<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
 				    	<p> Id: ${fn:escapeXml(voteId)} </p>
-
+						<br>
 				    	
 			<%			}
 					}
@@ -53,9 +49,8 @@
 				    	
 		    <p> Would you like to change your vote? </p>
 
-			<form action="/castvote" method="post">
+			<form action="/changevote" method="post">
 		      <div><input type="submit" value="Yes"/></div>
-		      <input type="hidden" name="previousVote" value="${fn:escapeXml(myCandidate)}"/>
 		    </form>
 	    
 		   	<form action="/goodbye" method="post">

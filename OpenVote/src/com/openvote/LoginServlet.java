@@ -6,12 +6,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
+
 import com.googlecode.objectify.ObjectifyService;
 
 @SuppressWarnings("serial")
@@ -30,10 +28,18 @@ public class LoginServlet extends HttpServlet {
 	
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-		//verify login by getting login and password from req
-		//if correct, redirect to castvote.jsp
-		//else, redirect to error message / login screen?
-        resp.sendRedirect("/castvote.jsp");
+    	
+    	// These are null as user has not yet voted
+    	req.setAttribute("previousVote", null);
+    	req.setAttribute("currentVote", null);
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/castvote.jsp");
+		try
+		{
+			dispatcher.forward(req, resp);
+		} catch (ServletException e)
+		{
+			e.printStackTrace();
+		}
     }
 	
 

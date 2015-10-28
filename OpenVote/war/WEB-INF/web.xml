@@ -42,12 +42,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	</servlet-mapping>
 	
 	<servlet>
-        <servlet-name>castfakevote</servlet-name>
-        <servlet-class>com.openvote.CastFakeVoteServlet</servlet-class>
+        <servlet-name>changevote</servlet-name>
+        <servlet-class>com.openvote.ChangeVoteServlet</servlet-class>
     </servlet>
 	<servlet-mapping>
-		<servlet-name>castfakevote</servlet-name>
-		<url-pattern>/castfakevote</url-pattern>
+		<servlet-name>changevote</servlet-name>
+		<url-pattern>/changevote</url-pattern>
 	</servlet-mapping>
 	
 	<servlet>

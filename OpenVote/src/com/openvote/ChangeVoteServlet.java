@@ -19,26 +19,12 @@ public class ChangeVoteServlet extends HttpServlet
 	
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-    	Integer numFakeVoteBatches = new Integer(req.getParameter("numFakeVoteBatches"));
-
-    	// cast vote for all fake candidates
-    	ArrayList<Vote> votes = new ArrayList<Vote>();
-		for (Candidate c: Candidate.values()) {
-			Vote fakeVote = new Vote(c.ordinal());
-    		ofy().save().entity(fakeVote).now();
-    		votes.add(fakeVote);
-    	}
+    	
+    	// current vote is now previous vote, since voter is about to change their vote
+    	Vote currentVote = (Vote) req.getSession().getAttribute("currentVote");
+		req.getSession().setAttribute("previousVote", currentVote);
 		
-		// update number of fake vote batches saved in Datastore
-		VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
-		numFakeVoteBatches = counter.increment();
-		ofy().save().entity(counter).now();
-
-		req.getSession().setAttribute("votes", votes);
-		req.setAttribute("numFakeVoteBatches", numFakeVoteBatches);
-		req.setAttribute("voteIndex", 0);
-		
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/displayVoteKeys.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/castvote.jsp");
 		try
 		{
 			dispatcher.forward(req, resp);
