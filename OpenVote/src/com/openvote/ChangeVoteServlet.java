@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CastFakeVoteServlet extends HttpServlet
+public class ChangeVoteServlet extends HttpServlet
 {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {

@@ -12,50 +12,56 @@
  </head>
 
 	<%
-		ArrayList<Vote> votes = (ArrayList<Vote>) session.getAttribute("votes");
-		int voteIndex = (Integer) request.getAttribute("voteIndex");
-		pageContext.setAttribute("numBatches", request.getAttribute("numFakeVoteBatches"));
+		// TODO: make dis werk w/ castvoteservlet
+		Vote myVote = (Vote) request.getAttribute("currentVote");
+		Integer previousVote = (Integer) request.getAttribute("previousVote");
+		ArrayList<Vote> offsetVotes = (ArrayList<Vote>) request.getAttribute("offsetVotes");
+		pageContext.setAttribute("myCandidate", myVote.getCandidate());
+		pageContext.setAttribute("previousVote", previousVote);
 	%>
 
   <body>
   	<div class="container">
   		<h2>OpenVote</h2>
   		<div class="container">
-			<% 
-					Vote vote = votes.get(voteIndex);
-					int candidateIndex = vote.getCandidate();
-					pageContext.setAttribute("voteId", vote.getId());
-					pageContext.setAttribute("voteCandidate", Candidate.values()[candidateIndex]);
+  		
+			<%
+					pageContext.setAttribute("voteId", myVote.getId());
+					pageContext.setAttribute("voteCandidate", Candidate.values()[myVote.getCandidate();]);
 			%>
 					<p> Here is your vote: </p>
 					<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
 			    	<p> Id: ${fn:escapeXml(voteId)} </p>
 			    	<br>
-			    	<p> Would you like to see another vote? </p>
-			<% 
-			if (voteIndex < votes.size() - 1) {	
+			<%
+					if (offsetVotes.size() != 0) {
 			%>
-					<form action="/scrollvotes" method="post">
-				      <div><input type="submit" value="Yes"/></div>
-				      <input type="hidden" name="voteIndex" value="${fn:escapeXml(voteIndex)}"/>
-				      <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
-				    </form>
-		    <% 
-		    }
-		    else {
-		    %>
-					<% //<p> [ num fake vote batches: ${fn:escapeXml(numBatches)} ]</p> %>
-					<form action="/castfakevote" method="post">
-				      <div><input type="submit" value="Yes"/></div>
-				      <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
-				    </form>
-		    
-		    <% }
+					<p> Here are some other votes: </p>
+			<%
+						for (Vote v : offsetVotes) {
+							pageContext.setAttribute("voteId", v.getId());
+							pageContext.setAttribute("voteCandidate", Candidate.values()[v.getCandidate()]);
+						
 			%>
+						<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
+				    	<p> Id: ${fn:escapeXml(voteId)} </p>
+
+				    	
+			<%			}
+					}
+			%>
+				    	
+		    <p> Would you like to change your vote? </p>
+
+			<form action="/castvote" method="post">
+		      <div><input type="submit" value="Yes"/></div>
+		      <input type="hidden" name="previousVote" value="${fn:escapeXml(myCandidate)}"/>
+		    </form>
 	    
 		   	<form action="/goodbye" method="post">
 		      <div><input type="submit" value="No"/></div>
 		    </form>
+		    
 		</div>
 	</div>
   </body>
