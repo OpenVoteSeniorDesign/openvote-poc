@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
 	static {
         ObjectifyService.register(com.openvote.Vote.class);
         ObjectifyService.register(com.openvote.VoteBatchCounter.class);
+        ObjectifyService.register(com.openvote.TimeOut.class);
     }
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
