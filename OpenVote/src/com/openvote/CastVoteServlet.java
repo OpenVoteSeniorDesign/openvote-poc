@@ -28,7 +28,6 @@ public class CastVoteServlet extends HttpServlet {
       UserService userService=UserServiceFactory.getUserService();
   	  User user=userService.getCurrentUser();
     	
-  	  if (userService.isUserAdmin()) {
   		  
 
     	String candidate_str = req.getParameter("candidate");
@@ -60,9 +59,6 @@ public class CastVoteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-  	  } else {
-  		resp.sendRedirect(userService.createLoginURL(req.getRequestURI()));
-		  }
 		
     }
   	  

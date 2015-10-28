@@ -32,18 +32,29 @@ public class LoginServlet extends HttpServlet {
             throws IOException {
 		
 
-    	UserService userService=UserServiceFactory.getUserService();
+    	  UserService userService=UserServiceFactory.getUserService();
     	  User user=userService.getCurrentUser();
-    	  if (userService.isUserAdmin()) {
+    	  
+    	  if (user!= null && isAdminLoggedIn()) {
     	        resp.sendRedirect("/castvote.jsp");
     	  }
     	 else {
-    	    resp.sendRedirect(userService.createLoginURL(req.getRequestURI()));
+    	    resp.sendRedirect(userService.createLoginURL("/castvote.jsp"));
     	  }
     	  
     	  
     	  
     }
+    
+    public static boolean isAdminLoggedIn(){
+    	  try {
+    	    UserService userService=UserServiceFactory.getUserService();
+    	    return userService.isUserAdmin();
+    	  }
+    	 catch (  IllegalStateException e) {
+    	    return false;
+    	  }
+    	}
 	
 
 }

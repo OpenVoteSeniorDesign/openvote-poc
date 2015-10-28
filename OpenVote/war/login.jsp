@@ -8,13 +8,10 @@
  
   <body>
 
-    <form action="/login" method="post">
-      <div>Login:<br>
-      <input type="text" name="username"></textarea></div>     
-      <div>Password:<br>
-      <input type="text" name="username"></textarea></div>
-      <div><input type="submit" value="Log In"/></div>
-    </form>
+	  <body>
+		  <form action="LoginServlet" method="post">  
+			  <button name="Vote" type="submit" value="login">Vote</button>
+		  </form>  
 
   </body>
 </html>

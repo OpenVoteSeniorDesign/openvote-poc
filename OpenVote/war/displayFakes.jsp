@@ -38,7 +38,7 @@
       <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numFakeVoteBatches)}"/>
     </form>
     
-	<form action="/goodbye" method="post">
+	<form action="/goodbye.jsp" method="post">
       <div><input type="submit" value="No"/></div>
     </form>
 	
