@@ -26,7 +26,7 @@
 			      						.list();
 			    if (voteList.isEmpty()) {
 				%>
-				<p>The Election  has no votes published yet.</p>
+				<p>The Election  has no votes published yet. Check back in a few minutes!</p>
 				<%
 			  	  } else {
 				%>
