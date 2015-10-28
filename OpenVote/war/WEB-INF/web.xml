@@ -30,6 +30,14 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>results</servlet-name>
 		<url-pattern>/results</url-pattern>
 	</servlet-mapping>	
+	<servlet>
+		<servlet-name>singleresult</servlet-name>
+		<servlet-class>com.openvote.SingleResultServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>singleresult</servlet-name>
+		<url-pattern>/singleresult</url-pattern>
+	</servlet-mapping>
 	
 	
 	<servlet>
