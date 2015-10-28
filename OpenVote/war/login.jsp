@@ -3,18 +3,26 @@
  
 <html>
  <head>
-   <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+   <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.css" />
  </head>
  
   <body>
-
+ 	<div class="container">
+ 	<h2> OpenVote </h2>
+ 	
     <form action="/login" method="post">
-      <div>Login:<br>
-      <input type="text" name="username"></textarea></div>     
-      <div>Password:<br>
-      <input type="text" name="username"></textarea></div>
-      <div><input type="submit" value="Log In"/></div>
+    	<div class="panel panel-default">
+    		<div class="panel-body">
+      			<div align="center">Login:<br>
+      			<input type="text" name="username"></textarea></div>     
+      			<div align="center">Password:<br>
+      			<input type="text" name="username"></textarea></div>
+     			<div align="center"><input type="submit" value="Log In"/></div>
+     		</div>
+    	</div>
     </form>
+    
+    </div>
 
   </body>
 </html>

@@ -20,42 +20,62 @@
   <body>
   	<div class="container">
   		<h2>OpenVote</h2>
-  		<div class="container">
+  		<div class="panel panel-default">
 			<% 
 					Vote vote = votes.get(voteIndex);
 					int candidateIndex = vote.getCandidate();
 					pageContext.setAttribute("voteId", vote.getId());
 					pageContext.setAttribute("voteCandidate", Candidate.values()[candidateIndex]);
 			%>
-					<p> Here is your vote: </p>
-					<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
-			    	<p> Id: ${fn:escapeXml(voteId)} </p>
+			<div class="panel-heading"><h4>Here is your vote:</h4></div>
+				<div class="panel-body">
+					<div class="row"> 
+						<div class="col-md-2"><b>Candidate:</b></div> 
+						<div class="col-md-2">${fn:escapeXml(voteCandidate)}</div>
+						<div class="col-md-8"></div>
+					</div>
+			    	<div class="row"> 
+			    		<div class="col-md-2"><b>Id:</b></div> 
+			    		<div class="col-md-2">${fn:escapeXml(voteId)}</div>
+			    		<div class="col-md-8"></div>
+			    	</div>
+			    	
 			    	<br>
-			    	<p> Would you like to see another vote? </p>
+			    	<div> Would you like to see another vote? </div>
+			    	<br>
 			<% 
 			if (voteIndex < votes.size() - 1) {	
 			%>
-					<form action="/scrollvotes" method="post">
-				      <div><input type="submit" value="Yes"/></div>
-				      <input type="hidden" name="voteIndex" value="${fn:escapeXml(voteIndex)}"/>
-				      <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
-				    </form>
+					<div class="row">
+						<div class="col-md-1">
+							<form action="/scrollvotes" method="post">
+				      		<div><input class="btn btn-default" type="submit" value="Yes"/></div>
+				      		<input type="hidden" name="voteIndex" value="${fn:escapeXml(voteIndex)}"/>
+				      		<input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
+				    		</form>
+				    	</div>
 		    <% 
 		    }
 		    else {
 		    %>
 					<% //<p> [ num fake vote batches: ${fn:escapeXml(numBatches)} ]</p> %>
-					<form action="/castfakevote" method="post">
-				      <div><input type="submit" value="Yes"/></div>
-				      <input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
-				    </form>
+						<div class="col-md-1">
+							<form action="/castfakevote" method="post">
+				      		<div><input class="btn btn-default" type="submit" value="Yes"/></div>
+				      		<input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
+				    		</form>
+				    	</div>
 		    
 		    <% }
 			%>
-	    
-		   	<form action="/goodbye" method="post">
-		      <div><input type="submit" value="No"/></div>
-		    </form>
+	    				<div class="col-md-1">
+		   					<form action="/goodbye" method="post">
+		      				<div><input class="btn btn-default" type="submit" value="No"/></div>
+		    				</form>
+		    			</div>
+		    			<div class="col-md-10"></div>
+		    		</div>
+		    	</div>
 		</div>
 	</div>
   </body>
