@@ -62,18 +62,19 @@ public class LoginServlet extends HttpServlet {
    	 		resp.sendRedirect(userService.createLoginURL("/castvote.jsp"));
    	 	}
 		
-
     }
+		
+
     
     public static boolean isAdminLoggedIn(){
     	  try {
     	    UserService userService=UserServiceFactory.getUserService();
     	    return userService.isUserAdmin();
     	  }
-    	 catch (IllegalStateException e) {
+    	 catch (  IllegalStateException e) {
     	    return false;
     	  }
-    	}
+    }
 	
 
 }
