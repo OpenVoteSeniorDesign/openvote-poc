@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		UserService userService=UserServiceFactory.getUserService();
 		User user=userService.getCurrentUser();
 		
-		 if (userService.isUserAdmin()) {
+		if (user!= null && isAdminLoggedIn()) {
 		
     	// These are null as user has not yet voted
     	req.getSession().setAttribute("previousVote", null);
@@ -51,11 +51,21 @@ public class LoginServlet extends HttpServlet {
 	
  
     	} else {
-    	    resp.sendRedirect(userService.createLoginURL(req.getRequestURI()));
+    		resp.sendRedirect(userService.createLoginURL("/castvote.jsp"));
     	  }
 
 
     }
+    
+    public static boolean isAdminLoggedIn(){
+    	  try {
+    	    UserService userService=UserServiceFactory.getUserService();
+    	    return userService.isUserAdmin();
+    	  }
+    	 catch (  IllegalStateException e) {
+    	    return false;
+    	  }
+    	}
 	
 
 }
