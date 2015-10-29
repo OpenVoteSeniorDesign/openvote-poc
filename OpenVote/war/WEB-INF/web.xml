@@ -50,15 +50,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/changevote</url-pattern>
 	</servlet-mapping>
 	
-	<servlet>
-        <servlet-name>scrollvotes</servlet-name>
-        <servlet-class>com.openvote.ScrollVotesServlet</servlet-class>
-    </servlet>
-	<servlet-mapping>
-		<servlet-name>scrollvotes</servlet-name>
-		<url-pattern>/scrollvotes</url-pattern>
-	</servlet-mapping>
-	
 	
 	<servlet>
         <servlet-name>goodbye</servlet-name>

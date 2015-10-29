@@ -24,6 +24,24 @@ public class ChangeVoteServlet extends HttpServlet
     	Vote currentVote = (Vote) req.getSession().getAttribute("currentVote");
 		req.getSession().setAttribute("previousVote", currentVote);
 		
+		// save number of fake vote batches (create new counter if this is first vote ever cast)
+		// NOTE: does not work. really erratic behavior. don't know why.
+		VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
+		if (counter == null) {
+			synchronized(ChangeVoteServlet.class){
+				if (counter == null){
+					counter = new VoteBatchCounter(1);
+				}
+			}
+		}
+		else {
+			counter.increment();
+		}
+		ofy().save().entity(counter).now();
+		
+		// sending this to castvote jsp to be displayed for testing purpose
+		req.setAttribute("numBatches", counter.getNumBatches());
+		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/castvote.jsp");
 		try
 		{
