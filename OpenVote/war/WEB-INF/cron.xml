@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cronentries>
+<cron>
+<url>/cron/publishresults</url>
+<description>Put your Cron Job description here</description>
+<schedule>every 1 minute</schedule>
+</cron>
+</cronentries>
