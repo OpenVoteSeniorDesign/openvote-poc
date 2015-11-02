@@ -16,6 +16,7 @@ import com.googlecode.objectify.ObjectifyService;
 public class LoginServlet extends HttpServlet {
 	
 	static {
+
         ObjectifyService.register(com.openvote.Vote.class);
         ObjectifyService.register(com.openvote.VoteBatchCounter.class);
         ObjectifyService.register(com.openvote.TimeOut.class);
@@ -30,8 +31,8 @@ public class LoginServlet extends HttpServlet {
             throws IOException {
     	
     	// These are null as user has not yet voted
-    	req.setAttribute("previousVote", null);
-    	req.setAttribute("currentVote", null);
+    	req.getSession().setAttribute("previousVote", null);
+    	req.getSession().setAttribute("currentVote", null);
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/castvote.jsp");
 		try
 		{

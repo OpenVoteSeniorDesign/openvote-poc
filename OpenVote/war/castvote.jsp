@@ -18,7 +18,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Cast Your Vote!</div>
         <div class="panel-body">
-<%        	pageContext.setAttribute("numBatches", request.getAttribute("numBatches"));
+<%        	
 			for(Candidate candidate : Candidate.values()){
 			      pageContext.setAttribute("candidate", candidate.name());
 %>
@@ -27,7 +27,7 @@
 <%        }
 %>
       		<div class="form-group" align=left><button type="submit" class="btn btn-default">Cast Vote</button></div>
-      		<p> [ num batches: ${fn:escapeXml(numBatches)} ] </p>
+      		
     		</div>
 		  </div>
     	</form>

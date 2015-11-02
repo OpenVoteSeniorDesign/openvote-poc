@@ -30,23 +30,26 @@
 			    	<p> Id: ${fn:escapeXml(voteId)} </p>
 			    	<br>
 			<%
-					if (offsetVotes.size() != 0) {
-			%>
-					<p> Here are some other votes: </p>
-			<%
-						for (Vote v : offsetVotes) {
-							pageContext.setAttribute("voteId", v.getId());
-							pageContext.setAttribute("voteCandidate", Candidate.values()[v.getCandidate()]);
+				// Display offset (fake) votes (testing purposes)
+					//if (offsetVotes.size() != 0) {
+			
+					//<p> [ testing offset vote generation: here are the offset votes: </p>
+			
+						//pageContext.setAttribute("numBatches", request.getAttribute("numBatches"));
+						//for (Vote v : offsetVotes) {
+						//	pageContext.setAttribute("voteId", v.getId());
+						//	pageContext.setAttribute("voteCandidate", Candidate.values()[v.getCandidate()]);
 						
-			%>
-						<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
-				    	<p> Id: ${fn:escapeXml(voteId)} </p>
-						<br>
+			
+						//<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
+				    	//<p> Id: ${fn:escapeXml(voteId)} </p>
+						//<br>
 				    	
-			<%			}
-					}
-			%>
-				    	
+						//}
+					//}
+			
+				//<p> [ testing num fake vote batches counter: ${fn:escapeXml(numBatches)} ] </p>	   
+			%> 	
 		    <p> Would you like to change your vote? </p>
 
 			<form action="/changevote" method="post">
