@@ -50,11 +50,15 @@ public class LoginServlet extends HttpServlet {
 		}
 	
  
-    	} else {
-    		resp.sendRedirect(userService.createLoginURL("/castvote.jsp"));
-    	  }
+		} else 
+   		 if (user != null){
+   		resp.sendRedirect(userService.createLogoutURL("/login.jsp"));
+   	
+   	 } else {
 
-
+   	    resp.sendRedirect(userService.createLoginURL("/castvote.jsp"));
+   	 }
+		
     }
     
     public static boolean isAdminLoggedIn(){
@@ -62,7 +66,7 @@ public class LoginServlet extends HttpServlet {
     	    UserService userService=UserServiceFactory.getUserService();
     	    return userService.isUserAdmin();
     	  }
-    	 catch (  IllegalStateException e) {
+    	 catch (IllegalStateException e) {
     	    return false;
     	  }
     	}
