@@ -35,6 +35,7 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
 
+
 		UserService userService=UserServiceFactory.getUserService();
 		User user=userService.getCurrentUser();
 		
@@ -71,7 +72,7 @@ public class LoginServlet extends HttpServlet {
     	    UserService userService=UserServiceFactory.getUserService();
     	    return userService.isUserAdmin();
     	  }
-    	 catch (  IllegalStateException e) {
+    	 catch (IllegalStateException e) {
     	    return false;
     	  }
     }
