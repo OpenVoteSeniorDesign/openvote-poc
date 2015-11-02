@@ -10,6 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+ 
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
+
 import org.w3c.dom.css.Counter;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
@@ -58,12 +67,15 @@ public class CastVoteServlet extends HttpServlet {
     	
 		// Sending this to castvote jsp to be displayed for testing purpose
 		//req.setAttribute("numBatches", counter.getNumBatches());
-    	
+ 
     	
     	// Cast new (or first) vote for updated choice
     	String candidate_str = req.getParameter("candidate");
     	Vote myVote = new Vote(Candidate.valueOf(candidate_str).ordinal());
     	ofy().save().entity(myVote).now();
+
+
+
     	
     	// Update (or set) currentVote to be updated choice
     	req.getSession().setAttribute("currentVote", myVote);
@@ -72,6 +84,11 @@ public class CastVoteServlet extends HttpServlet {
 		try
 		{
 			dispatcher.forward(req, resp);
+	    	ByteArrayOutputStream out = QRCode.from("http://openvote-poc.appspot.com/viewsinglevote.jsp?votekey=" + myVote.id)
+	                .to(ImageType.PNG).stream();
+	    	resp.getOutputStream().write(out.toByteArray());
+	        resp.getOutputStream().flush();
+	        
 		} catch (ServletException e)
 		{
 			e.printStackTrace();
