@@ -19,7 +19,10 @@
 	
 
     	<div class="container">
-  			<h2>OpenVote</h2>
+  		<div class="page-header">
+  			<h2> OpenVote </h2>
+  		</div>
+
 			<div class="container">
 				<form action="/results" method="post">
 			    	<div><input type="submit" value="Refresh"/></div>

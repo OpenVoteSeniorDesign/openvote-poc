@@ -8,7 +8,10 @@
  
   <body>
  	<div class="container">
- 	<h2> OpenVote </h2>
+ 	<div class="page-header">
+  		<h2> OpenVote </h2>
+  	</div>
+ 	
  	
     <form action="/login" method="post">
     	<div class="panel panel-default">
