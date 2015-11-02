@@ -3,6 +3,6 @@
 <cron>
 <url>/cron/publishresults</url>
 <description>Put your Cron Job description here</description>
-<schedule>every 1 minute</schedule>
+<schedule>every 1 minutes</schedule>
 </cron>
 </cronentries>

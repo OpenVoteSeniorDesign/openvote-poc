@@ -19,47 +19,39 @@
   <body>
   	<div class="container">
   		<h2>OpenVote</h2>
-  		<div class="container">
+  		<div class="panel panel-default">
   		
 			<%
 					pageContext.setAttribute("voteId", myVote.getId());
 					pageContext.setAttribute("voteCandidate", Candidate.values()[myVote.getCandidate()]);
 			%>
-					<p> Here is your vote: </p>
-					<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
-			    	<p> Id: ${fn:escapeXml(voteId)} </p>
+			<div class="panel-heading"><h4>Here is your vote:</h4></div>
+				<div class="panel-body">
+					<div class="row"> 
+						<div class="col-md-2"><b>Candidate:</b></div> 
+						<div class="col-md-2">${fn:escapeXml(voteCandidate)}</div>
+						<div class="col-md-8"></div>
+					</div>
+			    	<div class="row"> 
+			    		<div class="col-md-2"><b>Id:</b></div> 
+			    		<div class="col-md-2">${fn:escapeXml(voteId)}</div>
+			    		<div class="col-md-8"></div>
+			    	</div>
+			    	
 			    	<br>
-			<%
-				// Display offset (fake) votes (testing purposes)
-					//if (offsetVotes.size() != 0) {
-			
-					//<p> [ testing offset vote generation: here are the offset votes: </p>
-			
-						//pageContext.setAttribute("numBatches", request.getAttribute("numBatches"));
-						//for (Vote v : offsetVotes) {
-						//	pageContext.setAttribute("voteId", v.getId());
-						//	pageContext.setAttribute("voteCandidate", Candidate.values()[v.getCandidate()]);
-						
-			
-						//<p> Candidate: ${fn:escapeXml(voteCandidate)} </p>
-				    	//<p> Id: ${fn:escapeXml(voteId)} </p>
-						//<br>
-				    	
-						//}
-					//}
-			
-				//<p> [ testing num fake vote batches counter: ${fn:escapeXml(numBatches)} ] </p>	   
-			%> 	
-		    <p> Would you like to change your vote? </p>
-
-			<form action="/changevote" method="post">
-		      <div><input type="submit" value="Yes"/></div>
-		    </form>
-	    
-		   	<form action="/goodbye" method="post">
-		      <div><input type="submit" value="No"/></div>
-		    </form>
-		    
+				    <p> Would you like to change your vote? </p>
+					<div class="col-md-1">
+						<form action="/changevote" method="post">
+				      		<div><input class="btn btn-default" type="submit" value="Yes"/></div>
+				    	</form>
+			    	</div>
+				    <div class="col-md-1">
+					   		<form action="/goodbye" method="post">
+					      		<div><input class="btn btn-default" type="submit" value="No"/></div>
+					    	</form>
+					</div>
+					<div class="col-md-10"></div>
+				</div>
 		</div>
 	</div>
   </body>
