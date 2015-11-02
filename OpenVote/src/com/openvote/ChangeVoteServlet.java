@@ -1,6 +1,9 @@
 package com.openvote;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,9 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.*;
-
-public class ScrollVotesServlet extends HttpServlet
+public class ChangeVoteServlet extends HttpServlet
 {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -19,12 +20,12 @@ public class ScrollVotesServlet extends HttpServlet
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
     	
-    	// increment counter used to index through array of fake votes on displayVoteKey.jsp
-    	Integer voteIndex = new Integer(req.getParameter("voteIndex"));
-    	voteIndex += 1;
-    	req.setAttribute("voteIndex",voteIndex);
-    	req.setAttribute("numFakeVoteBatches", req.getParameter("numFakeVoteBatches"));
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/displayVoteKeys.jsp");
+    	// current vote is now previous vote, since voter is about to change their vote
+    	Vote currentVote = (Vote) req.getSession().getAttribute("currentVote");
+		req.getSession().setAttribute("previousVote", currentVote);
+		
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/castvote.jsp");
 		try
 		{
 			dispatcher.forward(req, resp);
@@ -32,8 +33,7 @@ public class ScrollVotesServlet extends HttpServlet
 		{
 			e.printStackTrace();
 		}
-    	
-    	
+		
     }
 
 }
