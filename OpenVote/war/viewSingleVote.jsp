@@ -23,13 +23,13 @@
 		 	<%
 	 			
 		 		String id_str = request.getParameter("votekey");
-		 		Long id_query = Long.parseLong(id_str);
 		 		if(id_query == null){
 		 			System.out.println("request.getAttribute(\"votekey\") is null");
 		 		%>
 		 			<p><b> No vote matches id: null</p>
 		 		<%
 		 		}else{
+			 		Long id_query = Long.parseLong(id_str);
 		 			System.out.println(id_query.toString());
 		 			Vote vote = ObjectifyService.ofy().load().type(Vote.class).filter("id", id_query).first().get();
 	        		String candidate = Candidate.values()[vote.getCandidate()].name();	     
