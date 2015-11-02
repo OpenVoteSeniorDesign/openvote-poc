@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.googlecode.objectify.*" %>
+<%@ page import="java.lang.Exception.*" %>
 <%@ page import="java.util.*" %>
 
 
@@ -21,7 +22,7 @@
   			<h2>OpenVote</h2>
 			<div class="container">
 		 	<%
-	 			
+		 		Long id_query;
 		 		String id_str = request.getParameter("votekey");
 		 		if(id_str == null || id_str.equals("")){
 		 			System.out.println("request.getAttribute(\"votekey\") is null");
@@ -29,16 +30,22 @@
 		 			<p><b> No vote matches id: null</p>
 		 	<%
 		 		}else{
-			 		Long id_query = Long.parseLong(id_str);
+		 			try{
+		 				id_query = Long.parseLong(id_str);
+		 			}catch(NumberFormatException nfe){
+		 				pageContext.setAttribute("vote_id", id_str);
+		 				%>
+	        			<p><b> No vote matches id: ${fn:escapeXml(vote_id)}</p>	
+	        			<%
+	        			return;
+		 			}
+			 		
 		 			System.out.println(id_query.toString());
 		 			Vote vote = ObjectifyService.ofy().load().type(Vote.class).filter("id", id_query).first().get();
 	        		if( vote == null){
 	        			
 	        			pageContext.setAttribute("vote_id", id_query.toString());
-	        			%>
-	        			<p><b> No vote matches id: ${fn:escapeXml(vote_id)}</p>	
-	        			<%
-	        			return;
+	        			
 	        		}
 		 			String candidate = Candidate.values()[vote.getCandidate()].name();	     
 	        		pageContext.setAttribute("vote_candidate", candidate);
