@@ -8,25 +8,44 @@
 <%@ page import="com.googlecode.objectify.*" %>
 <%@ page import="java.util.*" %>
 
+
 <html>
 
 	<head>
    		<link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap.css" />
  	</head>
 
- 	<%
- 		Long id = (Long) request.getAttribute("id");
- 		Vote v = ObjectifyService.ofy()
- 				.load.type(Vote.class)
- 			    .filterKey("=", id);
- 			     
-	%>
- 	
+
 	<body>
     	<div class="container">
   			<h2>OpenVote</h2>
 			<div class="container">
-		 	 	You can view your vote here and there will be a back button.      
+		 	<%
+	 			
+		 		String id_str = request.getParameter("votekey");
+		 		Long id_query = Long.parseLong(id_str);
+		 		if(id_query == null){
+		 			System.out.println("request.getAttribute(\"votekey\") is null");
+		 		%>
+		 			<p><b> No vote matches id: null</p>
+		 		<%
+		 		}else{
+		 			System.out.println(id_query.toString());
+		 			Vote vote = ObjectifyService.ofy().load().type(Vote.class).filter("id", id_query).first().get();
+	        		String candidate = Candidate.values()[vote.getCandidate()].name();	     
+	        		pageContext.setAttribute("vote_candidate", candidate);
+	        		pageContext.setAttribute("vote_id", id_query.toString());
+	        	%>
+		        	<p><b>${fn:escapeXml(vote_id)}</b> voted for: </p>
+		        	<blockquote>${fn:escapeXml(vote_candidate)}</blockquote>
+		    
+		        <%
+		 		}
+	 			
+
+		      
+		    
+			%> 
 			</div>
 		</div>
 	</body>

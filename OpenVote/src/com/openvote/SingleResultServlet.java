@@ -26,7 +26,7 @@ public class SingleResultServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
         //get election from glcoud
     	//List<Vote> voteList = ObjectifyService.ofy().load().type(Vote.class).filter("published ==", true).list();
-    	
+
     }
 
     @Override
