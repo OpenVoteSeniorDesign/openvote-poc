@@ -11,6 +11,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 
+
+import javax.servlet.http.*;
+
 import com.google.appengine.api.users.*;
 import com.googlecode.objectify.ObjectifyService;
 
@@ -59,6 +62,7 @@ public class LoginServlet extends HttpServlet {
    	    resp.sendRedirect(userService.createLoginURL("/castvote.jsp"));
    	 }
 		
+
     }
     
     public static boolean isAdminLoggedIn(){

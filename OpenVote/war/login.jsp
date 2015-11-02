@@ -13,7 +13,6 @@
 			  <button name="Vote" type="submit" value="login">Vote</button>
 		  </form>  
 
-
   </body>
 </html>
 	

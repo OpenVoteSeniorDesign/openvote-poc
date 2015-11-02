@@ -55,7 +55,6 @@ public class CastVoteServlet extends HttpServlet {
     		ofy().save().entity(counter).now();
     	}
     
-
     	
 		// Sending this to castvote jsp to be displayed for testing purpose
 		//req.setAttribute("numBatches", counter.getNumBatches());
@@ -78,7 +77,6 @@ public class CastVoteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-
     }
     
     
