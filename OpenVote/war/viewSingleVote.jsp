@@ -23,23 +23,31 @@
 		 	<%
 	 			
 		 		String id_str = request.getParameter("votekey");
-		 		Long id_query = Long.parseLong(id_str);
-		 		if(id_query == null){
+		 		if(id_str == null || id_str.equals("")){
 		 			System.out.println("request.getAttribute(\"votekey\") is null");
-		 		%>
+		 	%>
 		 			<p><b> No vote matches id: null</p>
-		 		<%
+		 	<%
 		 		}else{
+			 		Long id_query = Long.parseLong(id_str);
 		 			System.out.println(id_query.toString());
 		 			Vote vote = ObjectifyService.ofy().load().type(Vote.class).filter("id", id_query).first().get();
-	        		String candidate = Candidate.values()[vote.getCandidate()].name();	     
+	        		if( vote == null){
+	        			
+	        			pageContext.setAttribute("vote_id", id_query.toString());
+	        			%>
+	        			<p><b> No vote matches id: ${fn:escapeXml(vote_id)}</p>	
+	        			<%
+	        			return;
+	        		}
+		 			String candidate = Candidate.values()[vote.getCandidate()].name();	     
 	        		pageContext.setAttribute("vote_candidate", candidate);
 	        		pageContext.setAttribute("vote_id", id_query.toString());
-	        	%>
+	        %>
 		        	<p><b>${fn:escapeXml(vote_id)}</b> voted for: </p>
 		        	<blockquote>${fn:escapeXml(vote_candidate)}</blockquote>
 		    
-		        <%
+		    <%
 		 		}
 	 			
 
