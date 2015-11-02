@@ -102,9 +102,11 @@ public class CronServlet extends HttpServlet {
         
         // As long as all the talys minus the number of fake votes is greater than 0 we are good
         boolean doNotPublish = true;
+        boolean hasNoVotes = false;
         for(Candidate c : tally.keySet()){
-            doNotPublish &= tally.get(c)-fakeBatches.getNumBatches() > 0;
+            hasNoVotes |=   (tally.get(c)-fakeBatches.getNumBatches()) == 0 ;
         }
+        if(hasNoVotes==false) doNotPublish = false;
 
         /*
          * 5.
@@ -113,23 +115,24 @@ public class CronServlet extends HttpServlet {
          *     Publish to data store after changing the variable
          *     Add Time Out based on MAX_TIME_OUT
          */
+        if(doNotPublish == true){
+            int numInstances = ObjectifyService.ofy().load().type(TimeOut.class).count();
+            TimeOut time = null;
+            if(numInstances == 0){
+                time = new TimeOut();
+            }else if(numInstances == 1){
+                time = ObjectifyService.ofy().load().type(TimeOut.class).first().getValue();
+            }else{
+                System.err.println("Number of instances is greater that 1 for timeout");
+                System.exit(1);
+            }
 
-        int numInstances = ObjectifyService.ofy().load().type(TimeOut.class).count();
-        TimeOut time = null;
-        if( numInstances == 0){
-            time = new TimeOut();
-        }else if(numInstances == 1){
-            time = ObjectifyService.ofy().load().type(TimeOut.class).first().getValue();
-        }else{ 
-            System.err.println("Number of instances is greater that 1 for timeout");
-            System.exit(1);
+            // If  the timeoutCounter rolls over time.incrementTimeOut() == true
+            if(time.incrementTimeOut() == true){
+                doNotPublish = false;
+            }
+            ObjectifyService.ofy().save().entity(time).now();
         }
-        
-     
-        if(time.incrementTimeOut() == true && doNotPublish==true){
-            doNotPublish = false;
-        }
-        ObjectifyService.ofy().save().entity(time).now();
         
         // Publish if were good
         if(doNotPublish == false){
