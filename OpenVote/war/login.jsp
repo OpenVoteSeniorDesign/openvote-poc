@@ -7,22 +7,11 @@
  </head>
  
   <body>
- 	<div class="container">
- 	<h2> OpenVote </h2>
- 	
-    <form action="/login" method="post">
-    	<div class="panel panel-default">
-    		<div class="panel-body">
-      			<div align="center">Login:<br>
-      			<input type="text" name="username"></textarea></div>     
-      			<div align="center">Password:<br>
-      			<input type="text" name="username"></textarea></div>
-     			<div align="center"><input type="submit" value="Log In"/></div>
-     		</div>
-    	</div>
-    </form>
-    
-    </div>
+
+	  <body>
+		  <form action="LoginServlet" method="post">  
+			  <button name="Vote" type="submit" value="login">Vote</button>
+		  </form>  
 
   </body>
 </html>
