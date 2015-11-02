@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.cmd.LoadType;
 
 @SuppressWarnings("serial")
 public class CronServlet extends HttpServlet {
@@ -61,7 +62,7 @@ public class CronServlet extends HttpServlet {
          * 
          * Taly Up all of the unb-pulished votes // vote
          */
-        
+      
         Map<Candidate, Integer> tally = new HashMap<Candidate, Integer>();
         for(Vote v : voteList){
             Candidate key = Candidate.values()[v.getCandidate()];
@@ -77,46 +78,61 @@ public class CronServlet extends HttpServlet {
          * 4. 
          * 
          * Anonymity Check :
-         * Require at least one vote per candidate must be present before we can move votes over
-         * numFakeBatches saved by CastFakeVotes atomically and assumed to be only first Integer in
-         * data store
-         * Alternative condition:
-         * boolean anonimityTransfer = (tally.keySet().size() > Candidate.values().length) &&
-         * (candList.size()>TEMP_VOTE_BUFFER_FILL);
+         *    
+         *     Require at least one vote per candidate must be present before we can move votes over
+         *     numFakeBatches saved by CastFakeVotes atomically in data store
+         *     
+         *     Alternative condition:
+         *     boolean anonimityTransfer = (tally.keySet().size() > Candidate.values().length) &&
+         *     (candList.size()>TEMP_VOTE_BUFFER_FILL);
          */
-
-        int numFakeBatches = ObjectifyService.ofy().load().type(Integer.class).first().getValue(); // this
-                                                                                                   // will
-                                                                                                   // be
-                                                                                                   // number
-                                                                                                   // of
-                                                                                                   // the
-                                                                                                   // fake
-                                                                                                   // vote
-                                                                                                   // clusters
-        int numCandiates = Candidate.values().length;
-        int realVotes = voteList.size() - numFakeBatches * numCandiates;
-
-        // As long as all the talys are greater than realVotes we can go ahead and publish
-        boolean doNotPublish = true;
-        for(Candidate c : tally.keySet()){
-            doNotPublish &= tally.get(c) >= realVotes;
+        
+        int numInstancesFakeBatches = ObjectifyService.ofy().load().type(VoteBatchCounter.class).count();
+        VoteBatchCounter fakeBatches = null;
+        if( numInstancesFakeBatches == 0){
+            fakeBatches = null;
+            System.err.println("Number of instances is 0 for VoteBatchCounter");
+            System.exit(1);
+        }else if(numInstancesFakeBatches == 1){
+            fakeBatches = ObjectifyService.ofy().load().type(VoteBatchCounter.class).first().getValue();
+        }else{ 
+            System.err.println("Number of instances is greater that 1 for VoteBatchCounter");
+            System.exit(1);
         }
+        
+        // As long as all the talys minus the number of fake votes is greater than 0 we are good
+        boolean doNotPublish = true;
+        boolean hasNoVotes = false;
+        for(Candidate c : tally.keySet()){
+            hasNoVotes |=   (tally.get(c)-fakeBatches.getNumBatches()) == 0 ;
+        }
+        if(hasNoVotes==false) doNotPublish = false;
 
         /*
          * 5.
          * 
          * Time Out Transfer and Publish Votes Publicly :
-         * Publish to data store after changing the variable
-         * Add Time Out based on MAX_TIME_OUT
+         *     Publish to data store after changing the variable
+         *     Add Time Out based on MAX_TIME_OUT
          */
+        if(doNotPublish == true){
+            int numInstances = ObjectifyService.ofy().load().type(TimeOut.class).count();
+            TimeOut time = null;
+            if(numInstances == 0){
+                time = new TimeOut();
+            }else if(numInstances == 1){
+                time = ObjectifyService.ofy().load().type(TimeOut.class).first().getValue();
+            }else{
+                System.err.println("Number of instances is greater that 1 for timeout");
+                System.exit(1);
+            }
 
-        // Check on Time out
-        TimeOut time = ObjectifyService.ofy().load().type(TimeOut.class).first().getValue();
-        if(time.incrementTimeOut() == true && doNotPublish==true){
-            doNotPublish = false;
+            // If  the timeoutCounter rolls over time.incrementTimeOut() == true
+            if(time.incrementTimeOut() == true){
+                doNotPublish = false;
+            }
+            ObjectifyService.ofy().save().entity(time).now();
         }
-        ObjectifyService.ofy().save().entity(time).now();
         
         // Publish if were good
         if(doNotPublish == false){
@@ -124,12 +140,6 @@ public class CronServlet extends HttpServlet {
                 // 1 is going to work
                 v.publish();
                 ObjectifyService.ofy().save().entity(v).now();
-
-
-                /*
-                 * 2 I think this may be faster not incuring so much over head of loading and re storing
-                 * ObjectifyService.ofy().toEntity(v).setProperty("published", true);
-                 */
             }
         }
 
