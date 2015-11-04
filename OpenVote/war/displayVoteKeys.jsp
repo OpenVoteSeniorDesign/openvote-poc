@@ -37,7 +37,7 @@
 			    		<div class="col-md-8"></div>
 			    	</div>
 			    	<div>
-			    		<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://openvote-poc.appspot.com/viewsinglevote.jsp?votekey=${fn:escapeXml(voteId)}"/>
+			    		<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://openvote-poc.appspot.com/viewSingleVote.jsp?votekey=${fn:escapeXml(voteId)}"/>
 			    	</div>
 			    	<br>
 				    <p> Would you like to change your vote? </p>
