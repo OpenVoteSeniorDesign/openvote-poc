@@ -16,17 +16,26 @@
  	</head>
 
 	<body>
-	
+ 		<div class="page-header">
+ 			<img style="display: inline; width:50px;height:50px" src="http://www.clker.com/cliparts/B/B/Z/v/Z/Q/star-th.png" class="img-responsive" alt="Red Star">
+  			<h2 style="display: inline"> OpenVote </h2>
+  		</div>
 
-    	<div class="container">
-  			<h2>OpenVote</h2>
 			<div class="container">
-				<form action="/results" method="post">
-			    	<div><input type="submit" value="Refresh"/></div>
-				</form>
-				<form action="/" method="post">
-		    		<div><input type="submit" value="Return to Login"/></div>
-		    	</form>
+				<div class="row">
+					<div class="col-md-3">
+						<form action="/results" method="post">
+			    			<div><input class="btn pull-left" type="submit" value="Refresh"/></div>
+						</form>
+					</div>
+					<div class="col-md-6"></div>
+					<div class="col-md-3">
+						<form action="/" method="post">
+		    				<div><input class="btn pull-right" type="submit" value="Return to Login"/></div>
+		    			</form>
+		    		</div>
+		    		
+		    	</div>
 			      <% //get all of the published votes
 			      List<Vote> voteList = ObjectifyService.ofy()
 			      						.load().type(Vote.class)
@@ -34,11 +43,23 @@
 			      						.list();
 			    if (voteList.isEmpty()) {
 				%>
-				<p>The Election  has no votes published yet. Check back in a few minutes!</p>
+				<br><br><br><br>
+				<h4 align="center">The Election  has no votes published yet. Check back in a few minutes!</h4>
+			
 				<%
 			  	  } else {
 				%>
-				<p>Votes in the Election:</p>
+				<div class="container">
+				  <h2>Votes in the Election</h2>
+				  <p>Below are all the published votes in the election, with candidates voted for and each vote ID associated with the vote.</p>            
+				  <table class="table">
+				    <thead>
+				      <tr>
+				        <th>Candidate Selection</th>
+				        <th>Vote ID</th>
+				      </tr>
+				    </thead>
+					<tbody>
 				
 				<%
 			      // Look at all of our votes
@@ -52,15 +73,20 @@
 			            pageContext.setAttribute("vote_candidate", candidate);
 			            pageContext.setAttribute("vote_id", id.toString());
 				%>
-					<p><b>${fn:escapeXml(vote_id)}</b> voted for: </p>
-					<blockquote>${fn:escapeXml(vote_candidate)}</blockquote>
-					
+				      <tr>
+				        <td>${fn:escapeXml(vote_id)}</td>
+				        <td>${fn:escapeXml(vote_candidate)}</td>
+				      </tr>
+
 				<%
 			        }
 			    }
 				%>
-				   
+				  	</tbody>
+				  </table>
+				</div> 
+				
 			</div>
-		</div>
+
 	</body>
 </html>

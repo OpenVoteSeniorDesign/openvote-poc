@@ -7,17 +7,20 @@
  </head>
  
   <body>
- 	<div class="container">
- 	<h2> OpenVote </h2>
+ 	<div class="page-header">
+ 		<img style="display: inline; width:50px;height:50px" src="http://www.clker.com/cliparts/B/B/Z/v/Z/Q/star-th.png" class="img-responsive" alt="Red Star">
+  		<h2 style="display: inline"> OpenVote </h2>
+  	</div>
  	
+ 	<div class="container">
     <form action="/login" method="post">
     	<div class="panel panel-default">
     		<div class="panel-body">
       			<div align="center">Login:<br>
-      			<input type="text" name="username"></textarea></div>     
+      			<input type="text" name="username"></textarea></div><br>     
       			<div align="center">Password:<br>
-      			<input type="text" name="username"></textarea></div>
-     			<div align="center"><input type="submit" value="Log In"/></div>
+      			<input type="text" name="username"></textarea></div><br>
+     			<div align="center"><input class="btn btn-default" type="submit" value="Log In"/></div>
      		</div>
     	</div>
     </form>

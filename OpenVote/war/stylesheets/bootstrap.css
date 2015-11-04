@@ -1172,6 +1172,12 @@ hr {
 [role="button"] {
   cursor: pointer;
 }
+
+h2 {
+	padding-left: 15px;
+	vertical-align: middle;
+}
+
 h1,
 h2,
 h3,
@@ -1287,6 +1293,7 @@ h6,
 .h6 {
   font-size: 12px;
 }
+
 p {
   margin: 0 0 10px;
 }
@@ -1409,10 +1416,14 @@ a.bg-danger:focus {
   background-color: #e4b9b9;
 }
 .page-header {
+  padding-top: 9px;
   padding-bottom: 9px;
-  margin: 40px 0 20px;
-  border-bottom: 1px solid #eee;
-}
+  padding-right: 9px;
+  padding-left: 9px;
+  background-color: #0052A5; /* America Blue */
+  color: #ffffff;
+  margin: 0px 0px 50px 0px;
+  border-bottom: 1px solid #eee;}
 ul,
 ol {
   margin-top: 0;
@@ -5006,6 +5017,8 @@ a.badge:focus {
 .jumbotron {
   padding-top: 30px;
   padding-bottom: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
   margin-bottom: 30px;
   color: inherit;
   background-color: #eee;
@@ -5509,6 +5522,8 @@ button.list-group-item-danger.active:focus {
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  background-color: #333F48; /* Burnt Orange */
+  color: #ffffff;
 }
 .panel-heading > .dropdown .dropdown-toggle {
   color: inherit;
