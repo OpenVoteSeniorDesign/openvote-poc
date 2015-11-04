@@ -16,8 +16,9 @@ import com.googlecode.objectify.ObjectifyService;
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
 	
+	@Override
 	public void init(ServletConfig servletConfig) throws ServletException{
-
+		super.init(servletConfig);
         ObjectifyService.register(com.openvote.Vote.class);
         ObjectifyService.register(com.openvote.VoteBatchCounter.class);
         ObjectifyService.register(com.openvote.TimeOut.class);
