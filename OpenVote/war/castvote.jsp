@@ -11,12 +11,12 @@
  </head>
  
   <body>
-  <div class="container">
-  <div class="page-header">
-  	<h2> OpenVote </h2>
-  </div>
+ 	<div class="page-header">
+ 		<img style="display: inline; width:50px;height:50px" src="http://www.clker.com/cliparts/B/B/Z/v/Z/Q/star-th.png" class="img-responsive" alt="Red Star">
+  		<h2 style="display: inline"> OpenVote </h2>
+  	</div>
 
-
+	<div class="container">
     <form action="/castvote" method="post">
       <div class="panel panel-default">
         <div class="panel-heading">Cast Your Vote!</div>

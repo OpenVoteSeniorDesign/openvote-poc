@@ -17,11 +17,11 @@
 
 
 	<body>
-    	<div class="container">
-  		<div class="page-header">
-  			<h2> OpenVote </h2>
+ 		<div class="page-header">
+ 			<img style="display: inline; width:50px;height:50px" src="http://www.clker.com/cliparts/B/B/Z/v/Z/Q/star-th.png" class="img-responsive" alt="Red Star">
+  			<h2 style="display: inline"> OpenVote </h2>
   		</div>
-
+  		
 			<div class="container">
 		 	<%
 	 			
@@ -39,17 +39,31 @@
 	        		pageContext.setAttribute("vote_candidate", candidate);
 	        		pageContext.setAttribute("vote_id", id_query.toString());
 	        	%>
-		        	<p><b>${fn:escapeXml(vote_id)}</b> voted for: </p>
-		        	<blockquote>${fn:escapeXml(vote_candidate)}</blockquote>
+	        	
+	        	<div class="container">
+				  <h2>Single Vote in the Election</h2>
+				  <p>Below is the vote you searched for, with the candidate selected and the corresponding vote ID.</p>            
+				  <table class="table">
+				    <thead>
+				      <tr>
+				        <th>Candidate Selection</th>
+				        <th>Vote ID</th>
+				      </tr>
+				    </thead>
+					<tbody>
+					<tr>
+				        <td>${fn:escapeXml(vote_id)}</td>
+				        <td>${fn:escapeXml(vote_candidate)}</td>
+				    </tr>
+				    </tbody>
+				  </table>
+				</div> 
 		    
 		        <%
 		 		}
-	 			
-
-		      
-		    
+	 		
 			%> 
 			</div>
-		</div>
+		
 	</body>
 </html>

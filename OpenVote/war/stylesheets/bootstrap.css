@@ -1172,6 +1172,12 @@ hr {
 [role="button"] {
   cursor: pointer;
 }
+
+h2 {
+	padding-left: 15px;
+	vertical-align: middle;
+}
+
 h1,
 h2,
 h3,
@@ -1287,6 +1293,7 @@ h6,
 .h6 {
   font-size: 12px;
 }
+
 p {
   margin: 0 0 10px;
 }
@@ -1413,11 +1420,10 @@ a.bg-danger:focus {
   padding-bottom: 9px;
   padding-right: 9px;
   padding-left: 9px;
-  background-color: #BF5700; /* Burnt Orange */
+  background-color: #0052A5; /* America Blue */
   color: #ffffff;
-  margin: 0px 0px 0px 0px
-  border-bottom: 1px solid #eee;
-}
+  margin: 0px 0px 50px 0px;
+  border-bottom: 1px solid #eee;}
 ul,
 ol {
   margin-top: 0;
