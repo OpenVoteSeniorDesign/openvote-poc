@@ -13,7 +13,6 @@
 
 	<%
 		Vote myVote = (Vote) request.getSession().getAttribute("currentVote");
-		ArrayList<Vote> offsetVotes = (ArrayList<Vote>) request.getAttribute("offsetVotes");
 	%>
 
   <body>
@@ -37,7 +36,9 @@
 			    		<div class="col-md-2">${fn:escapeXml(voteId)}</div>
 			    		<div class="col-md-8"></div>
 			    	</div>
-			    	
+			    	<div>
+			    		<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://openvote-poc.appspot.com/viewsinglevote.jsp?votekey=${fn:escapeXml(voteId)}"/>
+			    	</div>
 			    	<br>
 				    <p> Would you like to change your vote? </p>
 					<div class="col-md-1">
