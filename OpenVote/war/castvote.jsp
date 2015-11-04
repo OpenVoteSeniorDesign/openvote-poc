@@ -21,7 +21,8 @@
       <div class="panel panel-default">
         <div class="panel-heading">Cast Your Vote!</div>
         <div class="panel-body">
-<%        for(Candidate candidate : Candidate.values()){
+<%        	
+			for(Candidate candidate : Candidate.values()){
 			      pageContext.setAttribute("candidate", candidate.name());
 %>
             <div class="form-inline" align=left><input type="radio" name="candidate" value="${fn:escapeXml(candidate)}" checked> ${fn:escapeXml(candidate)}</div>
@@ -29,6 +30,7 @@
 <%        }
 %>
       		<div class="form-group" align=left><button type="submit" class="btn btn-default">Cast Vote</button></div>
+      		
     		</div>
 		  </div>
     	</form>

@@ -12,9 +12,7 @@
  </head>
 
 	<%
-		ArrayList<Vote> votes = (ArrayList<Vote>) session.getAttribute("votes");
-		int voteIndex = (Integer) request.getAttribute("voteIndex");
-		pageContext.setAttribute("numBatches", request.getAttribute("numFakeVoteBatches"));
+		Vote myVote = (Vote) request.getSession().getAttribute("currentVote");
 	%>
 
   <body>
@@ -25,11 +23,10 @@
   	
 	<div class="container">
   		<div class="panel panel-default">
-			<% 
-					Vote vote = votes.get(voteIndex);
-					int candidateIndex = vote.getCandidate();
-					pageContext.setAttribute("voteId", vote.getId());
-					pageContext.setAttribute("voteCandidate", Candidate.values()[candidateIndex]);
+  		
+			<%
+					pageContext.setAttribute("voteId", myVote.getId());
+					pageContext.setAttribute("voteCandidate", Candidate.values()[myVote.getCandidate()]);
 			%>
 			<div class="panel-heading"><h4>Here is your vote:</h4></div>
 				<div class="panel-body">
@@ -43,43 +40,23 @@
 			    		<div class="col-md-2">${fn:escapeXml(voteId)}</div>
 			    		<div class="col-md-8"></div>
 			    	</div>
-			    	
+			    	<div>
+			    		<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://openvote-poc.appspot.com/viewsinglevote.jsp?votekey=${fn:escapeXml(voteId)}"/>
+			    	</div>
 			    	<br>
-			    	<div> Would you like to see another vote? </div>
-			    	<br>
-			<% 
-			if (voteIndex < votes.size() - 1) {	
-			%>
-					<div class="row">
-						<div class="col-md-1">
-							<form action="/scrollvotes" method="post">
+				    <p> Would you like to change your vote? </p>
+					<div class="col-md-1">
+						<form action="/changevote" method="post">
 				      		<div><input class="btn btn-default" type="submit" value="Yes"/></div>
-				      		<input type="hidden" name="voteIndex" value="${fn:escapeXml(voteIndex)}"/>
-				      		<input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
-				    		</form>
-				    	</div>
-		    <% 
-		    }
-		    else {
-		    %>
-					<% //<p> [ num fake vote batches: ${fn:escapeXml(numBatches)} ]</p> %>
-						<div class="col-md-1">
-							<form action="/castfakevote" method="post">
-				      		<div><input class="btn btn-default" type="submit" value="Yes"/></div>
-				      		<input type="hidden" name="numFakeVoteBatches" value="${fn:escapeXml(numBatches)}"/>
-				    		</form>
-				    	</div>
-		    
-		    <% }
-			%>
-	    				<div class="col-md-1">
-		   					<form action="/goodbye" method="post">
-		      				<div><input class="btn btn-default" type="submit" value="No"/></div>
-		    				</form>
-		    			</div>
-		    			<div class="col-md-10"></div>
-		    		</div>
-		    	</div>
+				    	</form>
+			    	</div>
+				    <div class="col-md-1">
+					   		<form action="/goodbye" method="post">
+					      		<div><input class="btn btn-default" type="submit" value="No"/></div>
+					    	</form>
+					</div>
+					<div class="col-md-10"></div>
+				</div>
 		</div>
 	</div>
   </body>
