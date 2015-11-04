@@ -26,15 +26,16 @@ public class LoginServlet extends HttpServlet {
         ObjectifyService.register(com.openvote.TimeOut.class);
         
         // instantitate fake vote batch counter if not yet created.
+        // TODO: delete all counters in datastore from developers console and see if this works
         VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
 		if (counter == null) {
 			synchronized(LoginServlet.class){
 				if (counter == null){
-					counter = new VoteBatchCounter(0);
 					ofy().save().entity(counter).now();
 				}
 			}
 		}
+
     }
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)

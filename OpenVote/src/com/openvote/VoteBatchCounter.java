@@ -26,4 +26,5 @@ public class VoteBatchCounter
 		return numBatches;
 	}
 
+
 }
