@@ -38,6 +38,7 @@ public class LoginServlet extends HttpServlet {
 		UserService userService=UserServiceFactory.getUserService();
 		User user=userService.getCurrentUser();
 		
+		//user logged in and is Admin
 		if (user!= null && isAdminLoggedIn()) {
 		
     	// These are null as user has not yet voted
@@ -52,15 +53,14 @@ public class LoginServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	
- 
-		} else 
-   		 if (user != null){
-   		resp.sendRedirect(userService.createLogoutURL("/login.jsp"));
-   	
-   	 } else {
-
-   	    resp.sendRedirect(userService.createLoginURL("/castvote.jsp"));
-   	 }
+		//user logged in, is NOT admin
+		} else if (user != null){
+			resp.sendRedirect(userService.createLogoutURL("/login.jsp"));
+		
+		//user not logged in
+   	 	} else {
+   	 		resp.sendRedirect(userService.createLoginURL("/castvote.jsp"));
+   	 	}
 		
 
     }
