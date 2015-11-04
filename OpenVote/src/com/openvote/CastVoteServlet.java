@@ -12,16 +12,17 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
  
 @SuppressWarnings("serial")
 public class CastVoteServlet extends HttpServlet {
-	
-	public static VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
 
+	public static VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 	}
 	
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {   	
-
+    	
+		
     	Vote previousVote = (Vote) req.getSession().getAttribute("previousVote");
     	
     	// If user is changing their vote, cast an offset vote for every other candidate in the enum
@@ -33,18 +34,10 @@ public class CastVoteServlet extends HttpServlet {
     			}
     		}
     		
-    		// Save number of fake vote batches (create new counter if this is first vote ever cast)
-    		if (counter == null) {
-    			synchronized(ChangeVoteServlet.class){
-    				if (counter == null){
-    					counter = new VoteBatchCounter(1);
-    				}
-    			}
-    		}
-    		else {
-    			counter.increment();
-    		}
+    		// Increment number of fake vote batches
+    		counter.increment();
     		ofy().save().entity(counter).now();
+
     	}
     	
     	// Cast new (or first) vote for updated choice
