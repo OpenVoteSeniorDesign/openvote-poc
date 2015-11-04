@@ -24,7 +24,6 @@ public class ChangeVoteServlet extends HttpServlet
     	Vote currentVote = (Vote) req.getSession().getAttribute("currentVote");
 		req.getSession().setAttribute("previousVote", currentVote);
 		
-		
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/castvote.jsp");
 		try
 		{
