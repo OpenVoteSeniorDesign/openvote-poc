@@ -12,7 +12,10 @@
  
   <body>
   <div class="container">
-  <h2> OpenVote </h2>
+  <div class="page-header">
+  	<h2> OpenVote </h2>
+  </div>
+
 
     <form action="/castvote" method="post">
       <div class="panel panel-default">
@@ -22,7 +25,7 @@
 			for(Candidate candidate : Candidate.values()){
 			      pageContext.setAttribute("candidate", candidate.name());
 %>
-            <div class="form-inline" align=left><input type="radio" name="candidate" value="${fn:escapeXml(candidate)}" checked>${fn:escapeXml(candidate)}</div>
+            <div class="form-inline" align=left><input type="radio" name="candidate" value="${fn:escapeXml(candidate)}" checked> ${fn:escapeXml(candidate)}</div>
             <br>
 <%        }
 %>

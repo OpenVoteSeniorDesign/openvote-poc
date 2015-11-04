@@ -17,7 +17,10 @@
 
   <body>
   	<div class="container">
-  		<h2>OpenVote</h2>
+  	<div class="page-header">
+  		<h2> OpenVote </h2>
+  	</div>
+
   		<div class="panel panel-default">
   		
 			<%
