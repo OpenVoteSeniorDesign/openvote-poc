@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
@@ -15,7 +16,7 @@ import com.googlecode.objectify.ObjectifyService;
 @SuppressWarnings("serial")
 public class LoginServlet extends HttpServlet {
 	
-	static {
+	public void init(ServletConfig servletConfig) throws ServletException{
 
         ObjectifyService.register(com.openvote.Vote.class);
         ObjectifyService.register(com.openvote.VoteBatchCounter.class);
