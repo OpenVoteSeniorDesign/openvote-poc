@@ -1,6 +1,8 @@
 package com.openvote;
 
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
+
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +24,17 @@ public class LoginServlet extends HttpServlet {
         ObjectifyService.register(com.openvote.Vote.class);
         ObjectifyService.register(com.openvote.VoteBatchCounter.class);
         ObjectifyService.register(com.openvote.TimeOut.class);
+        
+        // instantitate fake vote batch counter if not yet created.
+        VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
+		if (counter == null) {
+			synchronized(LoginServlet.class){
+				if (counter == null){
+					counter = new VoteBatchCounter(0);
+					ofy().save().entity(counter).now();
+				}
+			}
+		}
     }
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
