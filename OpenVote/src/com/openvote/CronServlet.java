@@ -92,12 +92,10 @@ public class CronServlet extends HttpServlet {
         if( numInstancesFakeBatches == 0){
             fakeBatches = null;
             System.err.println("Number of instances is 0 for VoteBatchCounter");
-            System.exit(1);
         }else if(numInstancesFakeBatches == 1){
             fakeBatches = ObjectifyService.ofy().load().type(VoteBatchCounter.class).first().getValue();
         }else{ 
             System.err.println("Number of instances is greater that 1 for VoteBatchCounter");
-            System.exit(1);
         }
         
         // As long as all the talys minus the number of fake votes is greater than 0 we are good
@@ -124,7 +122,6 @@ public class CronServlet extends HttpServlet {
                 time = ObjectifyService.ofy().load().type(TimeOut.class).first().getValue();
             }else{
                 System.err.println("Number of instances is greater that 1 for timeout");
-                System.exit(1);
             }
 
             // If  the timeoutCounter rolls over time.incrementTimeOut() == true
