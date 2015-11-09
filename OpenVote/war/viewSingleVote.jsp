@@ -77,7 +77,7 @@
 				
 				<div>
 		  		<form action="/results" method="post">
-				<div><input class="btn btn-default" type="submit" value="Click Here to see Live Results!"/></div>
+				<div><input class="btn btn-default" type="submit" value="Return to Live Results"/></div>
 				</form>
 		  		</div>
 		    <%
