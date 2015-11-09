@@ -16,10 +16,26 @@
  	</head>
 
 	<body>
- 		<div class="page-header">
+ 		<div class="page-header" style="margin-bottom: 0px">
  			<img style="display: inline; width:50px;height:50px" src="http://www.clker.com/cliparts/B/B/Z/v/Z/Q/star-th.png" class="img-responsive" alt="Red Star">
   			<h2 style="display: inline"> OpenVote </h2>
   		</div>
+  		<nav class="navbar navbar-default">
+    		<div>
+      			<ul class="nav navbar-nav">
+        			<li class="active"><a href="/viewAllVotes.jsp">Live Results</a></li>
+        			<li><a href="#">Election Overview</a></li>
+      			</ul>
+      			<form class="navbar-form navbar-right" role="search">
+        				<div class="form-group">
+    						<input type="text" class="form-control" name="voteId" placeholder="Search Your Vote">
+    					</div>
+    					<form action="/viewSingleVote.jsp?votekey=${fn:escapeXml(voteId)}" method="post">
+		    				<button type="submit" class="btn btn-default">Search</button>
+		    			</form>
+  				</form>
+    		</div>
+		</nav>
 
 			<div class="container">
 				<div class="row">
