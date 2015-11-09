@@ -47,12 +47,12 @@
 				    <p> Would you like to change your vote? </p>
 					<div class="col-md-1">
 						<form action="/changevote" method="post">
-				      		<div><input class="btn btn-default" type="submit" value="Yes"/></div>
+				      		<div><input id="btn_changevote"class="btn btn-default" type="submit" value="Yes"/></div>
 				    	</form>
 			    	</div>
 				    <div class="col-md-1">
 					   		<form action="/goodbye" method="post">
-					      		<div><input class="btn btn-default" type="submit" value="No"/></div>
+					      		<div><input id="btn_goodbye" class="btn btn-default" type="submit" value="No"/></div>
 					    	</form>
 					</div>
 					<div class="col-md-10"></div>

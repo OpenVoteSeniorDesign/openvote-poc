@@ -22,7 +22,7 @@
 		  	<div class="row">
 				<div class="col-md-3">
 					<form action="/results" method="post">
-		    			<div><input class="btn pull-left" type="submit" value="Click here to go to Live Results!"/></div>
+		    			<div><input id="btn_gotoliveresults"class="btn pull-left" type="submit" value="Click here to go to Live Results!"/></div>
 		    		</form>
 				</div>
 				<div class="col-md-6"></div>
