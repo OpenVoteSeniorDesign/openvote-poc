@@ -17,10 +17,10 @@
     	<div class="panel panel-default">
     		<div class="panel-body">
       			<div align="center">Login:<br>
-      			<input type="text" name="username"></textarea></div><br>     
+      			<input id="login" type="text" name="username"></textarea></div><br>     
       			<div align="center">Password:<br>
-      			<input type="text" name="username"></textarea></div><br>
-     			<div align="center"><input class="btn btn-default" type="submit" value="Log In"/></div>
+      			<input id="password" type="text" name="username"></textarea></div><br>
+     			<div align="center"><input id="btn_login" class="btn btn-default" type="submit" value="Log In"/></div>
      		</div>
     	</div>
     </form>

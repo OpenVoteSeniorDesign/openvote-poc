@@ -25,11 +25,11 @@
 			for(Candidate candidate : Candidate.values()){
 			      pageContext.setAttribute("candidate", candidate.name());
 %>
-            <div class="form-inline" align=left><input type="radio" name="candidate" value="${fn:escapeXml(candidate)}" checked> ${fn:escapeXml(candidate)}</div>
+            <div class="form-inline" align=left><input id="btn_${fn:escapeXml(candidate)}" type="radio" name="candidate" value="${fn:escapeXml(candidate)}" checked> ${fn:escapeXml(candidate)}</div>
             <br>
 <%        }
 %>
-      		<div class="form-group" align=left><button type="submit" class="btn btn-default">Cast Vote</button></div>
+      		<div class="form-group" align=left><button id="btn_submit" type="submit" class="btn btn-default">Cast Vote</button></div>
       		
     		</div>
 		  </div>
