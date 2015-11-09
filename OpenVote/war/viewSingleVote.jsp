@@ -23,6 +23,7 @@
   			<h2 style="display: inline"> OpenVote </h2>
   		</div>
   		
+  		
 			<div class="container">
 		 	<%
 		 		Long id_query;
@@ -72,7 +73,13 @@
 				    </tr>
 				    </tbody>
 				  </table>
-				</div> 		    
+				</div> 	
+				
+				<div>
+		  		<form action="/results" method="post">
+				<div><input class="btn btn-default" type="submit" value="Return to Live Results"/></div>
+				</form>
+		  		</div>
 		    <%
 		 		}
 	 		
