@@ -31,28 +31,28 @@
 			<div class="panel-heading"><h4>Here is your vote:</h4></div>
 				<div class="panel-body">
 					<div class="row"> 
-						<div class="col-md-2"><b>Candidate:</b></div> 
-						<div class="col-md-2">${fn:escapeXml(voteCandidate)}</div>
+						<div id="candidate" class="col-md-2"><b>Candidate:</b></div> 
+						<div id="candidate_name" class="col-md-2">${fn:escapeXml(voteCandidate)}</div>
 						<div class="col-md-8"></div>
 					</div>
 			    	<div class="row"> 
-			    		<div class="col-md-2"><b>Id:</b></div> 
-			    		<div class="col-md-2">${fn:escapeXml(voteId)}</div>
+			    		<div id="id" class="col-md-2"><b>Id:</b></div> 
+			    		<div id="id_num" class="col-md-2">${fn:escapeXml(voteId)}</div>
 			    		<div class="col-md-8"></div>
 			    	</div>
 			    	<div>
-			    		<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://openvote-poc.appspot.com/viewSingleVote.jsp?votekey=${fn:escapeXml(voteId)}"/>
+			    		<img id="qrcode" src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://openvote-poc.appspot.com/viewSingleVote.jsp?votekey=${fn:escapeXml(voteId)}"/>
 			    	</div>
 			    	<br>
 				    <p> Would you like to change your vote? </p>
 					<div class="col-md-1">
 						<form action="/changevote" method="post">
-				      		<div><input class="btn btn-default" type="submit" value="Yes"/></div>
+				      		<div><input id="btn_changevote"class="btn btn-default" type="submit" value="Yes"/></div>
 				    	</form>
 			    	</div>
 				    <div class="col-md-1">
 					   		<form action="/goodbye" method="post">
-					      		<div><input class="btn btn-default" type="submit" value="No"/></div>
+					      		<div><input id="btn_goodbye" class="btn btn-default" type="submit" value="No"/></div>
 					    	</form>
 					</div>
 					<div class="col-md-10"></div>

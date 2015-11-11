@@ -25,13 +25,13 @@
 				<div class="row">
 					<div class="col-md-3">
 						<form action="/results" method="post">
-			    			<div><input class="btn pull-left" type="submit" value="Refresh"/></div>
+			    			<div><input id="btn_refresh" class="btn pull-left" type="submit" value="Refresh"/></div>
 						</form>
 					</div>
 					<div class="col-md-6"></div>
 					<div class="col-md-3">
 						<form action="/" method="post">
-		    				<div><input class="btn pull-right" type="submit" value="Return to Login"/></div>
+		    				<div><input id="btn_return_login" class="btn pull-right" type="submit" value="Return to Login"/></div>
 		    			</form>
 		    		</div>
 		    		
