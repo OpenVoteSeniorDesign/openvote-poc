@@ -19,16 +19,18 @@
 			<h1>Thank you for voting!</h1>      
 		   	<p>Be sure to visit OpenVote.org later and verify your vote using the vote ID given to you.</p>
 		  	
-		  	<div class="row">
+			<div class="row">
 				<div class="col-md-3">
 					<form action="/results" method="post">
-		    			<div><input id="btn_gotoliveresults"class="btn pull-left" type="submit" value="Click here to go to Live Results!"/></div>
-		    		</form>
+		    			<div><input id="btn_gotoliveresults" class="btn pull-left" type="submit" value="Click here to go to Live Results!"/></div>
+					</form>
 				</div>
 				<div class="col-md-6"></div>
 				<div class="col-md-3">
-							    		
-	    		</div>	
+					<form action="/" method="post">
+	    				<div><input id="btn_return_login" class="btn pull-right" type="submit" value="Return to Login"/></div>
+	    			</form>
+	    		</div>
 		    </div>
 		 
 		</div>      
