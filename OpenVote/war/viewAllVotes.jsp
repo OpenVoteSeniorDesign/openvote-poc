@@ -28,15 +28,24 @@
       			</ul>
       			<form class="navbar-form navbar-right" role="search">
         				<div class="form-group">
-    						<input type="text" class="form-control" name="voteId" placeholder="Search Your Vote">
+    						<input type="search" class="form-control" name="votekey" id="voteSearch" placeholder="Search Your Vote">
     					</div>
-    					<form action="/viewSingleVote.jsp?votekey=${fn:escapeXml(voteId)}" method="post">
-		    				<button type="submit" class="btn btn-default">Search</button>
-		    			</form>
+    					<form method="post">
+    						<button onclick="searchSingleVote()" class="btn btn-default">Search</button>
+  						</form>
   				</form>
     		</div>
 		</nav>
-
+		
+		<script>
+			function searchSingleVote() {
+    			var x = document.getElementById("voteSearch").value;
+    			session.setAttribute("votekey", x);
+    			string redirect="viewSingleVote.jsp?votekey=" + x;
+    			response.sendRedirect(redirect);
+			}
+		</script>
+		
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">

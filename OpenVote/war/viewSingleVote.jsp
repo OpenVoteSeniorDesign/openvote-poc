@@ -30,10 +30,10 @@
       			</ul>
       			<form class="navbar-form navbar-right" role="search">
         				<div class="form-group">
-    						<input type="text" class="form-control" name="voteId" placeholder="Search Your Vote">
+    						<input type="text" class="form-control" name="votekey" placeholder="Search Your Vote">
     					</div>
-    					<form action="/viewSingleVote.jsp?votekey=${fn:escapeXml(voteId)}" method="post">
-		    				<button type="submit" class="btn btn-default">Search</button>
+    					<form method="post">
+		    				<a onclick="window.location.href='viewSingleVote.jsp?votekey=${fn:escapeXml(votekey)}'" class="btn btn-default">Search</a>
 		    			</form>
   				</form>
     		</div>
