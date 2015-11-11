@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
 		
 		//user logged in, is NOT admin
 		} else if (user != null){
-			resp.sendRedirect("/notAdmin.jsp");
+			resp.sendRedirect("/");
 				
 		//user not logged in
 		} else {
