@@ -26,7 +26,7 @@
    	 	 UserService userService=UserServiceFactory.getUserService();
    	 	 User user = userService.getCurrentUser();
 		 String logout = userService.createLogoutURL("/");
-		 String login = userService.createLoginURL("readyToVote.jsp/");
+		 String login = userService.createLoginURL("/readyToVote.jsp");
 		 Boolean isAdminLoggedIn = false;
 
 		 
@@ -48,7 +48,7 @@
 			
 	  			<div class="panel panel-default">
 	  	    		<div class="panel-body">
-	  	     			<div align="center"><a href="<%=logout%>"><button type="button">Login</button></a></div>
+	  	     			<div align="center"><a href="<%=logout%>"><button type="button">Logout</button></a></div>
 	  	     		</div>
 	  	    	</div>
 						
