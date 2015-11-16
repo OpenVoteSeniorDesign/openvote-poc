@@ -17,7 +17,7 @@
     <div class="container">
 		<div class="jumbotron">
 			<h1>Thank you for voting!</h1>      
-		   	<p>Be sure to visit OpenVote.org later and verify your vote using the vote ID given to you.</p>
+		   	<p>Be sure to visit http://openvote-poc.appspot.com/viewAllVotes.jsp later to see election progress and verify your vote using the vote ID given to you.</p>
 		  	
 			<div class="row">
 				<div class="col-md-3">
