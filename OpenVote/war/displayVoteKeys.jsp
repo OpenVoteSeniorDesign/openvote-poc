@@ -36,7 +36,7 @@
 						<div class="col-md-8"></div>
 					</div>
 			    	<div class="row"> 
-			    		<div id="id" class="col-md-2"><b>Id:</b></div> 
+			    		<div id="id" class="col-md-2"><b>Vote ID:</b></div> 
 			    		<div id="id_num" class="col-md-2">${fn:escapeXml(voteId)}</div>
 			    		<div class="col-md-8"></div>
 			    	</div>
