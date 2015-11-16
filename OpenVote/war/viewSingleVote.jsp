@@ -68,8 +68,8 @@
 				    </thead>
 					<tbody>
 					<tr>
-				        <td>${fn:escapeXml(vote_id)}</td>
-				        <td>${fn:escapeXml(vote_candidate)}</td>
+				        <td id="candidate_entry">${fn:escapeXml(vote_candidate)}</td>
+				        <td id="id_entry">${fn:escapeXml(vote_id)}</td>
 				    </tr>
 				    </tbody>
 				  </table>
