@@ -47,7 +47,7 @@
 			   <form action="/login" method="post">
 		       	<div class="panel panel-default">
 		       		<div class="panel-body">
-		        			<div align="center"><input class="btn btn-default" type="submit" value="Continue"/></div>
+		        			<div align="center"><input id="btn_continue_admin" class="btn btn-default" type="submit" value="Continue"/></div>
 		        	</div>
 		       	</div>
 		       </form>
@@ -63,7 +63,7 @@
 			
 			<div class="panel panel-default">
 	    		<div class="panel-body">
-	     			<div align="center"><a href="<%=URL%>"><button type="button">Logout</button></a></div>
+	     			<div align="center"><a href="<%=URL%>"><button id="btn_logout" type="button">Logout</button></a></div>
 	     		</div>
 	    	</div>
 						
@@ -80,7 +80,7 @@
 				  <form action="/login" method="post">
 			      	<div class="panel panel-default">
 			      		<div class="panel-body">
-			       			<div align="center"><input class="btn btn-default" type="submit" value="Continue"/></div>
+			       			<div align="center"><input id="btn_continue_not_admin" class="btn btn-default" type="submit" value="Continue"/></div>
 			       		</div>
 			      	</div>
 			      </form>
