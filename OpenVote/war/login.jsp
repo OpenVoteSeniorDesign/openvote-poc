@@ -63,7 +63,7 @@
   		 	
  			<div class="container" align="center">
 			
- 			<h3>Please allow to the admin to login.</h3>
+ 			<h3>Please allow the admin to login.</h3>
 			
  			<div class="panel panel-default">
  	    		<div class="panel-body">
