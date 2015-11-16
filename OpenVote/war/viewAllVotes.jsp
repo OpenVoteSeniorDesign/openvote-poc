@@ -26,25 +26,16 @@
         			<li class="active"><a href="/viewAllVotes.jsp">Live Results</a></li>
         			<li><a href="#">Election Overview</a></li>
       			</ul>
-      			<form class="navbar-form navbar-right" role="search">
+      			<form action="/viewSingleVote.jsp?votekey=${fn:escapeXml(votekey)}" class="navbar-form navbar-right" role="search">
         				<div class="form-group">
     						<input type="search" class="form-control" name="votekey" id="voteSearch" placeholder="Search Your Vote">
     					</div>
-    					<form method="post">
-    						<button onclick="searchSingleVote()" class="btn btn-default">Search</button>
-  						</form>
+    					<div class="form-group">
+    						<button type="submit" class="btn btn-default">Search</button>
+  						</div>
   				</form>
     		</div>
 		</nav>
-		
-		<script>
-			function searchSingleVote() {
-    			var x = document.getElementById("voteSearch").value;
-    			session.setAttribute("votekey", x);
-    			string redirect="viewSingleVote.jsp?votekey=" + x;
-    			response.sendRedirect(redirect);
-			}
-		</script>
 		
 			<div class="container">
 				<div class="row">
