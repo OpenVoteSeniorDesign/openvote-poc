@@ -55,8 +55,8 @@
 				  <table class="table">
 				    <thead>
 				      <tr>
-				        <th>Candidate Selection</th>
 				        <th>Vote ID</th>
+				        <th>Candidate Selection</th>
 				      </tr>
 				    </thead>
 					<tbody>
