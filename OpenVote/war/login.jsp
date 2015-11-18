@@ -65,7 +65,7 @@
 			      	<div class="panel panel-default">
 			      		<div class="panel-body">
 			      			<br>
-                                                <div align="center"><a href="<%=logout%>"><button id="btn_continue_not_admin" type="button" class="btn btn-default">Logout</button></a></div>
+                                                <div align="center"><a href="<%=login%>"><button type="button">Login</button></a></div>
 			       			<br>
 			       			<div align="center"><a href="/viewAllVotes.jsp">or click here to view election results</a></div>
 			       			<br>
