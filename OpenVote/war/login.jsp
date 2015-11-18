@@ -45,17 +45,14 @@
 			 %>
 	  			<div class="container" align="center">
 
-			
 	  			<h3>Please logout first.</h3>
 			
-
 	  			<div class="panel panel-default">
 	  	    		<div class="panel-body">
 	  	     			<div align="center"><a href="<%=logout%>"><button type="button">Logout</button></a></div>
 	  	     		</div>
 	  	    	</div>
 
-						
 	  			</div>
 						
   		<%//user not logged in 
@@ -74,8 +71,6 @@
  			</div>
   		
 		 <% } %>
-
-	  
 
 
   </body>
