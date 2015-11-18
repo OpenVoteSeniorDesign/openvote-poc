@@ -13,7 +13,7 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 @SuppressWarnings("serial")
 public class CastVoteServlet extends HttpServlet {
 
-	public static VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
+	//public static VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -35,8 +35,8 @@ public class CastVoteServlet extends HttpServlet {
     		}
     		
     		// Increment number of fake vote batches
-    		counter.increment();
-    		ofy().save().entity(counter).now();
+    		//counter.increment();
+    		//ofy().save().entity(counter).now();
 
     	}
     	

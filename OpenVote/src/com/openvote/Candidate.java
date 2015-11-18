@@ -1,6 +1,6 @@
 package com.openvote;
 
 public enum Candidate { 	
-	Dory, Nemo;
+	Kelsey, Robin, Will, Reed, Alex, Dylan;
 }
 	
