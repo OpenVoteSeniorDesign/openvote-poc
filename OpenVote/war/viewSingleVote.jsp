@@ -62,9 +62,14 @@
 			 		
 		 			System.out.println(id_query.toString());
 		 			Vote vote = ObjectifyService.ofy().load().type(Vote.class).filter("id", id_query).first().get();
+		 			System.out.println(vote);
 	        		if( vote == null){
 	        			
 	        			pageContext.setAttribute("vote_id", id_query.toString());
+	        			%>
+	        			<p><b> No vote matches id: ${fn:escapeXml(vote_id)}</p>	
+	        			<%
+	        			return;
 	        			
 	        		}
 		 			String candidate = Candidate.values()[vote.getCandidate()].name();	     
