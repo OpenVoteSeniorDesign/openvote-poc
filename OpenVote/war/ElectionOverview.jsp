@@ -41,7 +41,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-3">
-						<form action="/results" method="post">
+						<form action="/overview" method="post">
 			    			<div><input id="btn_refresh" class="btn pull-left" type="submit" value="Refresh"/></div>
 						</form>
 					</div>
@@ -67,21 +67,20 @@
 				  // Look at all of our votes
 			        for (Vote vote : voteList) {
 			            
-			            
-			            Long id = vote.getId();
-			            String candidate = Candidate.values()[vote.getCandidate()].name();
-			            for(CandidateTally ct : tallies){
-			            	if(candidate.equals(ct.name))
-			            	{
-			            		ct.tally += 1;
-			            	}
-			            }
+				            Long id = vote.getId();
+				            String candidate = Candidate.values()[vote.getCandidate()].name();
+				            for(CandidateTally ct : tallies){
+				            	if(candidate.equals(ct.name))
+				            	{
+				            		ct.tally += 1;
+				            	}
+				            }
 			        }
 			    //}
 				%>
 				
 				<div class="container">
-				  <h2>Candidate Talies</h2>
+				  <h2>Candidate Tallies</h2>
 				  <p>Below are the current number of votes per candidate, given the published results.</p>            
 				  <table class="table">
 				    <thead>

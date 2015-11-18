@@ -39,6 +39,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/singleresult</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>overview</servlet-name>
+		<servlet-class>com.openvote.OverviewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>overview</servlet-name>
+		<url-pattern>/overview</url-pattern>
+	</servlet-mapping>	
+	
 	
 	<servlet>
         <servlet-name>login</servlet-name>
