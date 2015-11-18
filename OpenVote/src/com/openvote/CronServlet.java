@@ -76,7 +76,7 @@ public class CronServlet extends HttpServlet {
         System.err.println("num candidates in tally: " + tally.keySet().size());
         // As long as each candidate has a vote, we can publish
         boolean doNotPublish = false;
-        for(Candidate c : tally.keySet()){
+        for(Candidate c : Candidate.values()){
         	System.err.println("candidate : " + c + ", tally: " + tally.get(c));
             if (tally.get(c) == 0) {
             	doNotPublish = true;
