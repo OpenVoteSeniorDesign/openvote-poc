@@ -2,6 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
  <%@ page import="com.google.appengine.api.users.*" %>
  <%@ page import="java.util.*" %>
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
  
 <html>
  <head>
@@ -24,7 +25,8 @@
   	  <%
    	 	 UserService userService=UserServiceFactory.getUserService();
    	 	 User user = userService.getCurrentUser();
-		 String URL = userService.createLogoutURL("/");
+		 String logout = userService.createLogoutURL("/");
+		 String login = userService.createLoginURL("/readyToVote.jsp");
 		 Boolean isAdminLoggedIn = false;
 
 		 
@@ -36,58 +38,39 @@
 				 
 		   	  }
 		 
-		 
-  		 //user logged in and is Admin
-  		 if (user!= null && isAdminLoggedIn) { 	  %>
-			 
-			<div class="container" align="center">
-				
-			<h3>You are ready to vote.</h3>
-		       
-			   <form action="/login" method="post">
-		       	<div class="panel panel-default">
-		       		<div class="panel-body">
-		        			<div align="center"><input id="btn_continue_admin" class="btn btn-default" type="submit" value="Continue"/></div>
-		        	</div>
-		       	</div>
-		       </form>
-    
-		    </div>
 
-  		<% //user logged in, is NOT admin 
-		 } else if (user != null){ %>
-	    	
-			<div class="container" align="center">
+			  //if user logged in (admin or not), signout
+		if (user != null){ 
 			
-			<h3>You are signed into a non-admin account. Please log out.</h3>
+			 %>
+	  			<div class="container" align="center">
+
+	  			<h3>Please logout first.</h3>
 			
-			<div class="panel panel-default">
-	    		<div class="panel-body">
-	     			<div align="center"><a href="<%=URL%>"><button id="btn_logout" type="button">Logout</button></a></div>
-	     		</div>
-	    	</div>
-						
-			</div>
+	  			<div class="panel panel-default">
+	  	    		<div class="panel-body">
+	  	     			<div align="center"><a href="<%=logout%>"><button type="button">Logout</button></a></div>
+	  	     		</div>
+	  	    	</div>
+
+	  			</div>
 						
   		<%//user not logged in 
 		 } else { %>
   		 	
-
-			   	<div class="container" align="center">
-				
-				<h3>Please allow the admin to log in.</h3>
-			      
-				  <form action="/login" method="post">
-			      	<div class="panel panel-default">
-			      		<div class="panel-body">
-			       			<div align="center"><input id="btn_continue_not_admin" class="btn btn-default" type="submit" value="Continue"/></div>
-			       		</div>
-			      	</div>
-			      </form>
-    
-			    </div>
-  		 <% } %>
-	  
+ 			<div class="container" align="center">
+			
+ 			<h3>Please allow the admin to login.</h3>
+			
+ 			<div class="panel panel-default">
+ 	    		<div class="panel-body">
+ 	     			<div align="center"><a href="<%=login%>"><button type="button">Login</button></a></div>
+ 	     		</div>
+ 	    	</div>
+						
+ 			</div>
+  		
+		 <% } %>
 
 
   </body>
