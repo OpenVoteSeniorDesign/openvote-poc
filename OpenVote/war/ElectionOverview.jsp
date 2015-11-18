@@ -3,6 +3,7 @@
 <%@ page import="com.googlecode.objectify.Key" %>
 <%@ page import="com.googlecode.objectify.ObjectifyService" %>
 <%@ page import="com.openvote.Candidate" %>
+<%@ page import="com.openvote.CandidateTally" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -23,8 +24,8 @@
   		<nav class="navbar navbar-default">
     		<div>
       			<ul class="nav navbar-nav">
-        			<li class="active"><a href="/viewAllVotes.jsp">Live Results</a></li>
-        			<li><a href="/ElectionOverview.jsp">Election Overview</a></li>
+        			<li><a href="/viewAllVotes.jsp">Live Results</a></li>
+        			<li class="active"><a href="/ElectionOverview.jsp">Election Overview</a></li>
       			</ul>
       			<form action="/viewSingleVote.jsp?votekey=${fn:escapeXml(votekey)}" class="navbar-form navbar-right" role="search">
         				<div class="form-group">
@@ -50,59 +51,68 @@
 		    				<div><input id="btn_return_login" class="btn pull-right" type="submit" value="Return to Login"/></div>
 		    			</form>
 		    		</div>
-		    		
 		    	</div>
+		    
 			      <% //get all of the published votes
 			      List<Vote> voteList = ObjectifyService.ofy()
 			      						.load().type(Vote.class)
 			      						.filter("published ==", true)
 			      						.list();
-			    if (voteList.isEmpty()) {
-				%>
-				<br><br><br><br>
-				<h4 align="center">The Election  has no votes published yet. Check back in a few minutes!</h4>
-			
-				<%
-			  	  } else {
-				%>
-				<div class="container">
-				  <h2>Votes in the Election</h2>
-				  <p>Below are all the published votes in the election, with candidates voted for and each vote ID associated with the vote.</p>            
-				  <table class="table">
-				    <thead>
-				      <tr>
-				        <th>Vote ID</th>
-				        <th>Candidate Selection</th>
-				      </tr>
-				    </thead>
-					<tbody>
-				
-				<%
-			      // Look at all of our votes
+			      
+			      ArrayList<CandidateTally> tallies = new ArrayList<CandidateTally>();
+				  for (Candidate c : Candidate.values()) {
+						CandidateTally temp = new CandidateTally(c);
+						tallies.add(temp);
+				  }
+				  // Look at all of our votes
 			        for (Vote vote : voteList) {
 			            
 			            
 			            Long id = vote.getId();
 			            String candidate = Candidate.values()[vote.getCandidate()].name();
-			            
-			            
-			            pageContext.setAttribute("vote_candidate", candidate);
-			            pageContext.setAttribute("vote_id", id.toString());
-				%>
-				      <tr>
-				        <td>${fn:escapeXml(vote_id)}</td>
-				        <td>${fn:escapeXml(vote_candidate)}</td>
-				      </tr>
-
-				<%
+			            for(CandidateTally ct : tallies){
+			            	if(candidate.equals(ct.name))
+			            	{
+			            		ct.tally += 1;
+			            	}
+			            }
 			        }
-			    }
+			    //}
 				%>
-				  	</tbody>
+				
+				<div class="container">
+				  <h2>Candidate Talies</h2>
+				  <p>Below are the current number of votes per candidate, given the published results.</p>            
+				  <table class="table">
+				    <thead>
+				      <tr>
+				        <th>Candidate</th>
+				        <th>Number of Votes</th>
+				      </tr>
+				    </thead>
+					<tbody>
+	  					<% 
+	  					Integer max = 0;
+	    				for(CandidateTally candidateTally : tallies){
+	    					//TODO: make div class variable depending on # of candidates
+				            pageContext.setAttribute("candidate_name", candidateTally.getName());
+				            pageContext.setAttribute("candidate_tally", candidateTally.getTally());
+				            /* if(candidateTally.tally > max){
+				            	max = candidateTally.tally;
+				            } */
+				            	
+		    			%>
+    					<tr>
+	    						<td>${fn:escapeXml(candidate_name)}</td>
+	      						<td>${fn:escapeXml(candidate_tally)}</td>
+    					</tr>
+	  					<%
+	    				}
+	      				%>	
+					</tbody>
 				  </table>
 				</div> 
-				
-			</div>
-
+			</div>	
+			
 	</body>
 </html>
