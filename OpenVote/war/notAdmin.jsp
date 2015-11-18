@@ -23,7 +23,7 @@
 
     	<div class="panel panel-default">
     		<div class="panel-body">
-     			<div align="center"><a href="<%=URL%>"><button type="button">Logout</button></a></div>
+     			<div align="center"><a href="<%=URL%>"><button type="button" class="btn btn-default">Logout</button></a></div>
      		</div>
     	</div>
 
