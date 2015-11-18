@@ -59,7 +59,7 @@ public class CronServlet extends HttpServlet {
         /* 
          * 3. 
          * 
-         * Tally Up all of the unp-ublished votes // vote
+         * Tally Up all of the unpublished votes // vote
          */
       
         Map<Candidate, Integer> tally = new HashMap<Candidate, Integer>();
@@ -99,7 +99,7 @@ public class CronServlet extends HttpServlet {
             }
         }
         
-        // Publish if were good
+        // Publish if we're good
         if(doNotPublish == false){
         	time.reset();
             for(Vote v : voteList){
