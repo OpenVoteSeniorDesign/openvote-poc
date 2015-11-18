@@ -26,7 +26,7 @@
     		<div>
       			<ul class="nav navbar-nav">
         			<li><a href="/viewAllVotes.jsp">Live Results</a></li>
-        			<li><a href="#">Election Overview</a></li>
+        			<li><a href="/ElectionOverview.jsp">Election Overview</a></li>
       			</ul>
       			<form action="/viewSingleVote.jsp?votekey=${fn:escapeXml(votekey)}" class="navbar-form navbar-right" role="search">
         				<div class="form-group">
