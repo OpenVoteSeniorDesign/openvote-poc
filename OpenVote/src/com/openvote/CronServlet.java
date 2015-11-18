@@ -76,8 +76,10 @@ public class CronServlet extends HttpServlet {
         // As long as each candidate has a vote, we can publish
         boolean doNotPublish = false;
         for(Candidate c : tally.keySet()){
+        	System.err.println("candidate : " + c + ", tally: " + tally.get(c));
             if (tally.get(c) == 0) {
             	doNotPublish = true;
+            	
             }
         }
 
@@ -91,11 +93,13 @@ public class CronServlet extends HttpServlet {
         TimeOut time = ObjectifyService.ofy().load().type(TimeOut.class).first().getValue();
         if (time == null) {
         	time = new TimeOut();
+        	System.err.println("creating new TimeOut object");
         }
         if(doNotPublish == true){
             // If  the timeoutCounter rolls over time.incrementTimeOut() == true
             if(time.incrementTimeOut() == true){
                 doNotPublish = false;
+                System.err.println("TimeOut at: " + time.getTime());
             }
         }
         
