@@ -15,7 +15,9 @@
 	  
 	  
    	<div class="page-header">
+   		<a href="/">
    		<img style="display: inline; width:50px;height:50px" src="http://www.clker.com/cliparts/B/B/Z/v/Z/Q/star-th.png" class="img-responsive" alt="Red Star">
+    	</a>
     		<h2 style="display: inline"> OpenVote </h2>
 
 
@@ -47,31 +49,30 @@
 
 	  			<h3>Please logout first.</h3>
 			
-	  			<div class="panel panel-default">
-	  	    		<div class="panel-body">
-	  	     			<div align="center"><a href="<%=logout%>"><button type="button">Logout</button></a></div>
-	  	     		</div>
-	  	    	</div>
-
-	  			</div>
+			        <div class="panel panel-default">
+	    		                <div class="panel-body">
+	     			                <div align="center"><a href="<%=logout%>"><button id="btn_logout" type="button" class="btn btn-default">Logout</button></a></div>
+	     		                </div>
+	    	                </div>
 						
+			        </div>
   		<%//user not logged in 
 		 } else { %>
-  		 	
- 			<div class="container" align="center">
-			
- 			<h3>Please allow the admin to login.</h3>
-			
- 			<div class="panel panel-default">
- 	    		<div class="panel-body">
- 	     			<div align="center"><a href="<%=login%>"><button type="button">Login</button></a></div>
- 	     		</div>
- 	    	</div>
-						
- 			</div>
-  		
-		 <% } %>
-
-
+			   	<div class="container" align="center">
+				
+				<h3>Please allow the admin to log in.</h3>
+			      
+			      	<div class="panel panel-default">
+			      		<div class="panel-body">
+			      			<br>
+                                                <div align="center"><a href="<%=login%>"><button id="btn_logout" type="button" class="btn btn-default">Login</button></a></div>
+			       			<br>
+			       			<div align="center"><a href="/viewAllVotes.jsp">or click here to view election results</a></div>
+			       			<br>
+			       		</div>
+			      	</div>
+    
+			    </div>
+  		 <% } %>
   </body>
 </html>
