@@ -51,7 +51,7 @@
 			
 			        <div class="panel panel-default">
 	    		                <div class="panel-body">
-	     			                <div align="center"><a href="<%=URL%>"><button id="btn_logout" type="button" class="btn btn-default">Logout</button></a></div>
+	     			                <div align="center"><a href="<%=logout%>"><button id="btn_logout" type="button" class="btn btn-default">Logout</button></a></div>
 	     		                </div>
 	    	                </div>
 						
@@ -62,17 +62,15 @@
 				
 				<h3>Please allow the admin to log in.</h3>
 			      
-				  <form action="/login" method="post">
 			      	<div class="panel panel-default">
 			      		<div class="panel-body">
 			      			<br>
-			       			<div align="center"><input id="btn_continue_not_admin" class="btn btn-default" type="submit" value="Continue"/></div>
+                                                <div align="center"><a href="<%=logout%>"><button id="btn_continue_not_admin" type="button" class="btn btn-default">Logout</button></a></div>
 			       			<br>
 			       			<div align="center"><a href="/viewAllVotes.jsp">or click here to view election results</a></div>
 			       			<br>
 			       		</div>
 			      	</div>
-			      </form>
     
 			    </div>
   		 <% } %>
