@@ -27,4 +27,8 @@ public class TimeOut {
         return ret;
     }
     
+    void reset() {
+    	this.timeOutValue = 0;
+    }
+    
 }

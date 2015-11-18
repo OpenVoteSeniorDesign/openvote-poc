@@ -89,9 +89,9 @@ public class CronServlet extends HttpServlet {
          *     Publish to data store after changing the variable
          *     Add Time Out based on MAX_TIME_OUT
          */
+        TimeOut time = null;
         if(doNotPublish == true){
             int numInstances = ObjectifyService.ofy().load().type(TimeOut.class).count();
-            TimeOut time = null;
             if(numInstances == 0){
                 time = new TimeOut();
             }else if(numInstances == 1){
@@ -104,17 +104,19 @@ public class CronServlet extends HttpServlet {
             if(time.incrementTimeOut() == true){
                 doNotPublish = false;
             }
-            ObjectifyService.ofy().save().entity(time).now();
+            
         }
         
         // Publish if were good
         if(doNotPublish == false){
+        	time.reset();
             for(Vote v : voteList){
                 // 1 is going to work
                 v.publish();
                 ObjectifyService.ofy().save().entity(v).now();
             }
         }
+        ObjectifyService.ofy().save().entity(time).now();
 
     }
 
