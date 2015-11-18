@@ -23,20 +23,24 @@ public class LoginServlet extends HttpServlet {
 	public void init(ServletConfig servletConfig) throws ServletException{
 		try{
 		super.init(servletConfig);
+		System.err.println("1");
 		ObjectifyService.register(com.openvote.Vote.class);
-		ObjectifyService.register(com.openvote.VoteBatchCounter.class);
+		System.err.println("2");
+		//ObjectifyService.register(com.openvote.VoteBatchCounter.class);
+		System.err.println("3");
 		ObjectifyService.register(com.openvote.TimeOut.class);
+		System.err.println("5");
 
 		// instantitate fake vote batch counter if not yet created.
 		// TODO: delete all counters in datastore from developers console and see if this works
-		VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
-		if (counter == null) {
-			synchronized(LoginServlet.class){
-				if (counter == null){
-					ofy().save().entity(counter).now();
-				}
-			}
-		}
+		//VoteBatchCounter counter = ofy().load().type(VoteBatchCounter.class).first().getValue();
+//		if (counter == null) {
+//			synchronized(LoginServlet.class){
+//				if (counter == null){
+//					ofy().save().entity(counter).now();
+//				}
+//			}
+//		}
 		} catch(NullPointerException npe){
 			System.out.println("Caught the little fucker!");
 			npe.printStackTrace();
