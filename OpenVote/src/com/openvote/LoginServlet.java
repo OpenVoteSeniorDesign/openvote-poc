@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
     	
-    	
+		try{    	
 		UserService userService=UserServiceFactory.getUserService();
 		User user=userService.getCurrentUser();
 
@@ -74,6 +74,9 @@ public class LoginServlet extends HttpServlet {
 		//user not logged in
 		} else {
 			resp.sendRedirect(userService.createLoginURL("/login.jsp"));
+		}
+		} catch (NullPointerException npe){
+			npe.printStackTrace();
 		}
 
     }
