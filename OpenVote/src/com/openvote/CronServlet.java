@@ -74,37 +74,13 @@ public class CronServlet extends HttpServlet {
             }
         }
 
-        /*
-         * 4. 
-         * 
-         * Anonymity Check :
-         *    
-         *     Require at least one vote per candidate must be present before we can move votes over
-         *     numFakeBatches saved by CastFakeVotes atomically in data store
-         *     
-         *     Alternative condition:
-         *     boolean anonimityTransfer = (tally.keySet().size() > Candidate.values().length) &&
-         *     (candList.size()>TEMP_VOTE_BUFFER_FILL);
-         */
-        
-        int numInstancesFakeBatches = ObjectifyService.ofy().load().type(VoteBatchCounter.class).count();
-        VoteBatchCounter fakeBatches = null;
-        if( numInstancesFakeBatches == 0){
-            fakeBatches = null;
-            System.err.println("Number of instances is 0 for VoteBatchCounter");
-        }else if(numInstancesFakeBatches == 1){
-            fakeBatches = ObjectifyService.ofy().load().type(VoteBatchCounter.class).first().getValue();
-        }else{ 
-            System.err.println("Number of instances is greater that 1 for VoteBatchCounter");
-        }
-        
-        // As long as all the talys minus the number of fake votes is greater than 0 we are good
-        boolean doNotPublish = true;
-        boolean hasNoVotes = false;
+        // As long as each candidate has a vote, we can publish
+        boolean doNotPublish = false;
         for(Candidate c : tally.keySet()){
-            hasNoVotes |=   (tally.get(c)-fakeBatches.getNumBatches()) == 0 ;
+            if (tally.get(c) == 0) {
+            	doNotPublish = true;
+            }
         }
-        if(hasNoVotes==false) doNotPublish = false;
 
         /*
          * 5.
