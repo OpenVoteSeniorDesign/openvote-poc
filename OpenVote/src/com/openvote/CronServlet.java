@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +15,7 @@ import com.googlecode.objectify.ObjectifyService;
 
 @SuppressWarnings("serial")
 public class CronServlet extends HttpServlet {
-    private static final Logger _logger = Logger.getLogger(CronServlet.class.getName());
-    private final String endl = "\r\n";
     private static final int range = 60;
-    // Voting Authority Setup Parameters
-    // private static Properties properties;
-    // private static Storage storage;
-
-    private static final int MAX_TIME_OUT = 100;
-    private static final int TEMP_VOTE_BUFFER_FILL = Candidate.values().length + 1;
 
     // This adds a random amount of latency with a specified range in values and a desired offset in
     // units of seconds
@@ -55,7 +46,6 @@ public class CronServlet extends HttpServlet {
          */
         
         List<Vote> voteList = ObjectifyService.ofy().load().type(Vote.class).filter("published ==", false).list();
-        System.err.println("num unpublished votes: " + voteList.size());
         /* 
          * 3. 
          * 
@@ -65,7 +55,6 @@ public class CronServlet extends HttpServlet {
         Map<Candidate, Integer> tally = new HashMap<Candidate, Integer>();
         for(Vote v : voteList){
             Candidate key = Candidate.values()[v.getCandidate()];
-
             if(tally.containsKey(key) == false){
                 tally.put(key, 1);
             }else{
@@ -73,11 +62,9 @@ public class CronServlet extends HttpServlet {
             }
         }
         
-        System.err.println("num candidates in tally: " + tally.keySet().size());
-        // As long as each candidate has a vote, we can publish
+        // As long as each candidate has a vote (i.e., appears in the tally), we can publish
         boolean doNotPublish = false;
         for(Candidate c : Candidate.values()){
-        	System.err.println("candidate : " + c + ", tally: " + tally.get(c));
             if (!tally.containsKey(c)) {
             	doNotPublish = true;
             }
@@ -93,13 +80,11 @@ public class CronServlet extends HttpServlet {
         TimeOut time = ObjectifyService.ofy().load().type(TimeOut.class).first().getValue();
         if (time == null) {
         	time = new TimeOut();
-        	System.err.println("creating new TimeOut object");
         }
         if(doNotPublish == true){
             // If  the timeoutCounter rolls over time.incrementTimeOut() == true
             if(time.incrementTimeOut() == true){
                 doNotPublish = false;
-                System.err.println("TimeOut at: " + time.getTime());
             }
         }
         
