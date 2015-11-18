@@ -55,7 +55,7 @@ public class CronServlet extends HttpServlet {
          */
         
         List<Vote> voteList = ObjectifyService.ofy().load().type(Vote.class).filter("published ==", false).list();
-
+        System.err.println("num unpublished votes: " + voteList.size());
         /* 
          * 3. 
          * 
@@ -72,7 +72,8 @@ public class CronServlet extends HttpServlet {
                 tally.put(key, tally.get(key) + 1);
             }
         }
-
+        
+        System.err.println("num candidates in tally: " + tally.keySet().size());
         // As long as each candidate has a vote, we can publish
         boolean doNotPublish = false;
         for(Candidate c : tally.keySet()){
