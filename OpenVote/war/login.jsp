@@ -51,7 +51,7 @@
 			
 			        <div class="panel panel-default">
 	    		                <div class="panel-body">
-	     			                <div align="center"><a href="<%=logout%>"><button id="btn_logout" type="button" class="btn btn-default">Logout</button></a></div>
+	     			                <div align="center"><a href="<%=URL%>"><button id="btn_logout" type="button" class="btn btn-default">Logout</button></a></div>
 	     		                </div>
 	    	                </div>
 						
