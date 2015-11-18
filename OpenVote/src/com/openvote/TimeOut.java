@@ -12,7 +12,7 @@ public class TimeOut {
     
     private final int MAX_TIME_OUT = 5;
     
-    boolean incrementTimeOut(){
+    public boolean incrementTimeOut(){
        
         boolean ret = false;
         
@@ -27,7 +27,11 @@ public class TimeOut {
         return ret;
     }
     
-    void reset() {
+    public int getTime() {
+    	return this.timeOutValue;
+    }
+    
+    public void reset() {
     	this.timeOutValue = 0;
     }
     
