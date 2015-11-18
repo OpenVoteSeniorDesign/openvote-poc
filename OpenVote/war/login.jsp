@@ -14,7 +14,9 @@
 	  
 	  
    	<div class="page-header">
+   		<a href="/">
    		<img style="display: inline; width:50px;height:50px" src="http://www.clker.com/cliparts/B/B/Z/v/Z/Q/star-th.png" class="img-responsive" alt="Red Star">
+    	</a>
     		<h2 style="display: inline"> OpenVote </h2>
 
 
@@ -63,7 +65,7 @@
 			
 			<div class="panel panel-default">
 	    		<div class="panel-body">
-	     			<div align="center"><a href="<%=URL%>"><button id="btn_logout" type="button">Logout</button></a></div>
+	     			<div align="center"><a href="<%=URL%>"><button id="btn_logout" type="button" class="btn btn-default">Logout</button></a></div>
 	     		</div>
 	    	</div>
 						
@@ -80,7 +82,11 @@
 				  <form action="/login" method="post">
 			      	<div class="panel panel-default">
 			      		<div class="panel-body">
+			      			<br>
 			       			<div align="center"><input id="btn_continue_not_admin" class="btn btn-default" type="submit" value="Continue"/></div>
+			       			<br>
+			       			<div align="center"><a href="/viewAllVotes.jsp">or click here to view election results</a></div>
+			       			<br>
 			       		</div>
 			      	</div>
 			      </form>

@@ -17,8 +17,10 @@
 
 	<body>
  		<div class="page-header" style="margin-bottom: 0px">
- 			<img style="display: inline; width:50px;height:50px" src="http://www.clker.com/cliparts/B/B/Z/v/Z/Q/star-th.png" class="img-responsive" alt="Red Star">
-  			<h2 style="display: inline"> OpenVote </h2>
+			<a href="/">
+   			<img style="display: inline; width:50px;height:50px" src="http://www.clker.com/cliparts/B/B/Z/v/Z/Q/star-th.png" class="img-responsive" alt="Red Star">
+    		</a>  			
+    		<h2 style="display: inline"> OpenVote </h2>
   		</div>
   		<nav class="navbar navbar-default">
     		<div>
