@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +15,7 @@ import com.googlecode.objectify.ObjectifyService;
 
 @SuppressWarnings("serial")
 public class CronServlet extends HttpServlet {
-    private static final Logger _logger = Logger.getLogger(CronServlet.class.getName());
-    private final String endl = "\r\n";
     private static final int range = 60;
-    // Voting Authority Setup Parameters
-    // private static Properties properties;
-    // private static Storage storage;
-
-    private static final int MAX_TIME_OUT = 100;
-    private static final int TEMP_VOTE_BUFFER_FILL = Candidate.values().length + 1;
 
     // This adds a random amount of latency with a specified range in values and a desired offset in
     // units of seconds
@@ -55,7 +46,6 @@ public class CronServlet extends HttpServlet {
          */
         
         List<Vote> voteList = ObjectifyService.ofy().load().type(Vote.class).filter("published ==", false).list();
-
         /* 
          * 3. 
          * 
@@ -65,18 +55,17 @@ public class CronServlet extends HttpServlet {
         Map<Candidate, Integer> tally = new HashMap<Candidate, Integer>();
         for(Vote v : voteList){
             Candidate key = Candidate.values()[v.getCandidate()];
-
             if(tally.containsKey(key) == false){
                 tally.put(key, 1);
             }else{
                 tally.put(key, tally.get(key) + 1);
             }
         }
-
-        // As long as each candidate has a vote, we can publish
+        
+        // As long as each candidate has a vote (i.e., appears in the tally), we can publish
         boolean doNotPublish = false;
-        for(Candidate c : tally.keySet()){
-            if (tally.get(c) == 0) {
+        for(Candidate c : Candidate.values()){
+            if (!tally.containsKey(c)) {
             	doNotPublish = true;
             }
         }
