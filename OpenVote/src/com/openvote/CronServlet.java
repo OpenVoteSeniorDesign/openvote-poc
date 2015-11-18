@@ -78,9 +78,8 @@ public class CronServlet extends HttpServlet {
         boolean doNotPublish = false;
         for(Candidate c : Candidate.values()){
         	System.err.println("candidate : " + c + ", tally: " + tally.get(c));
-            if (tally.get(c) == 0) {
+            if (!tally.containsKey(c)) {
             	doNotPublish = true;
-            	
             }
         }
 
