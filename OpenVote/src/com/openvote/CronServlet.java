@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.cmd.LoadType;
 
 @SuppressWarnings("serial")
 public class CronServlet extends HttpServlet {
@@ -60,7 +59,7 @@ public class CronServlet extends HttpServlet {
         /* 
          * 3. 
          * 
-         * Taly Up all of the unb-pulished votes // vote
+         * Tally Up all of the unp-ublished votes // vote
          */
       
         Map<Candidate, Integer> tally = new HashMap<Candidate, Integer>();
@@ -89,22 +88,15 @@ public class CronServlet extends HttpServlet {
          *     Publish to data store after changing the variable
          *     Add Time Out based on MAX_TIME_OUT
          */
-        TimeOut time = null;
+        TimeOut time = ObjectifyService.ofy().load().type(TimeOut.class).first().getValue();
+        if (time == null) {
+        	time = new TimeOut();
+        }
         if(doNotPublish == true){
-            int numInstances = ObjectifyService.ofy().load().type(TimeOut.class).count();
-            if(numInstances == 0){
-                time = new TimeOut();
-            }else if(numInstances == 1){
-                time = ObjectifyService.ofy().load().type(TimeOut.class).first().getValue();
-            }else{
-                System.err.println("Number of instances is greater that 1 for timeout");
-            }
-
             // If  the timeoutCounter rolls over time.incrementTimeOut() == true
             if(time.incrementTimeOut() == true){
                 doNotPublish = false;
             }
-            
         }
         
         // Publish if were good
