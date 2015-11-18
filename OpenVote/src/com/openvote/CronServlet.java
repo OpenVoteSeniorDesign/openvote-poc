@@ -1,7 +1,6 @@
 package com.openvote;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
