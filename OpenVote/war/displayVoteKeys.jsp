@@ -44,7 +44,7 @@
 			    		<img id="qrcode" src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=http://openvote-poc.appspot.com/viewSingleVote.jsp?votekey=${fn:escapeXml(voteId)}"/>
 			    	</div>
 			    	<br>
-			    	<p> Scan this code to verify your vote, or save it to look up your vote later! </p>
+			    	<p> Scan this code to verify your vote, take a picture of it, or write down the Vote ID to look up your vote later! </p>
 			    	<br>
 				    <p> Would you like to change your vote? </p>
 					<div class="col-md-1">
